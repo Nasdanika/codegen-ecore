@@ -12,7 +12,7 @@ test:
     
   post:
     - mv org.nasdanika.codegen.ecore.repository/target/repository $CIRCLE_ARTIFACTS    
-    - mv org.nasdanika.codegen.ecore.repository/target/org.nasdanika.codegen.repository-*.zip $CIRCLE_ARTIFACTS    
+    - mv org.nasdanika.codegen.ecore.repository/target/org.nasdanika.codegen.ecore.repository-*.zip $CIRCLE_ARTIFACTS    
 
     - mvn clean verify javadoc:javadoc
     
