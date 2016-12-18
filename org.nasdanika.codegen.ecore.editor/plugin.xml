@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated ecore-code-generation -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.nasdanika.codegen.ecore.presentation.EcoreModelWizardID"
+            name="%_UI_EcoreModelWizard_label"
+            class="org.nasdanika.codegen.ecore.presentation.EcoreModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/EcoreModelFile.gif">
+         <description>%_UI_EcoreModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated ecore-code-generation -->
+      <editor
+            id="org.nasdanika.codegen.ecore.presentation.EcoreEditorID"
+            name="%_UI_EcoreEditor_label"
+            icon="icons/full/obj16/EcoreModelFile.gif"
+            extensions="ecore"
+            class="org.nasdanika.codegen.ecore.presentation.EcoreEditor"
+            contributorClass="org.nasdanika.codegen.ecore.presentation.EcoreActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

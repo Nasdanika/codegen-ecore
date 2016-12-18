@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.nasdanika.codegen.ecore</groupId>
+	<artifactId>org.nasdanika.codegen.ecore.aggregator</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<name>ECore Code Generation Aggregator</name>
+	<packaging>pom</packaging>
+	
+ 	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.4</version>
+				<configuration>
+				    
+					<linksource>true</linksource>
+					<failOnError>false</failOnError>
+					
+			        <doclet>ch.raffael.doclets.pegdown.PegdownDoclet</doclet>
+			        <docletArtifact>
+			          <groupId>ch.raffael.pegdown-doclet</groupId>
+			          <artifactId>pegdown-doclet</artifactId>
+			          <version>1.1</version>
+			        </docletArtifact>
+			        <useStandardDocletOptions>true</useStandardDocletOptions>
+			        
+		            <links>						
+						<link>http://download.eclipse.org/modeling/emf/emf/javadoc/2.11</link>
+						<link>http://help.eclipse.org/neon/topic/org.eclipse.emf.cdo.doc/javadoc</link>		
+						<link>http://stleary.github.io/JSON-java</link>			
+						<link>https://osgi.org/javadoc/r4v42/</link>
+						<link>http://seleniumhq.github.io/selenium/docs/api/java/</link>
+						<link>http://www.nasdanika.org/products/codegen/apidocs/org.nasdanika.codegen/apidocs/</link>
+						<link>http://www.nasdanika.org/products/codegen/apidocs/org.nasdanika.codegen.edit/apidocs/</link>
+						<link>http://www.nasdanika.org/products/codegen/apidocs/org.nasdanika.codegen.editor/apidocs/</link>
+						<!--						
+						<link>http://docs.oracle.com/javase/8/docs/api</link>						
+						-->
+		            
+		            </links>
+					<detectLinks>true</detectLinks>					
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<modules>
+	
+		<module>org.nasdanika.codegen.ecore.feature</module>
+	
+		<module>org.nasdanika.codegen.ecore.repository</module>
+	
+		<module>org.nasdanika.codegen.ecore</module>
+		
+		<module>org.nasdanika.codegen.ecore.edit</module>
+		
+		<module>org.nasdanika.codegen.ecore.editor</module>
+	
+	</modules>
+</project>

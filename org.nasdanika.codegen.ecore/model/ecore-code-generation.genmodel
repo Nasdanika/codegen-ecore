@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/org.nasdanika.codegen.ecore/src" modelPluginID="org.nasdanika.codegen.ecore"
+    modelName="ecore-code-generation" rootExtendsInterface="org.eclipse.emf.cdo.CDOObject"
+    rootExtendsClass="org.eclipse.emf.internal.cdo.CDOObjectImpl" reflectiveDelegation="true"
+    importerID="org.eclipse.emf.importer.cdo" featureDelegation="Reflective" complianceLevel="8.0"
+    suppressGenModelAnnotations="false" copyrightFields="false" providerRootExtendsClass="org.eclipse.emf.cdo.edit.CDOItemProviderAdapter"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>ecore-code-generation.ecore</foreignModel>
+  <modelPluginVariables>CDO=org.eclipse.emf.cdo</modelPluginVariables>
+  <genPackages prefix="Ecore" basePackage="org.nasdanika.codegen" disposableProviderFactory="true" ecorePackage="ecore-code-generation.ecore#/">
+    <genClasses ecoreClass="ecore-code-generation.ecore#//ECoreCodeGeneration"/>
+  </genPackages>
+</genmodel:GenModel>

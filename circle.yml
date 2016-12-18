@@ -1,0 +1,35 @@
+machine:
+  java:
+    version: openjdk8
+    
+dependencies: 
+  override:
+    - echo 'Skipping Dependency Check'
+
+test:
+  override:
+    - mvn clean package
+    
+  post:
+    - mv org.nasdanika.codegen.ecore.repository/target/repository $CIRCLE_ARTIFACTS    
+    - mv org.nasdanika.codegen.ecore.repository/target/org.nasdanika.codegen.repository-*.zip $CIRCLE_ARTIFACTS    
+
+    - mvn clean verify javadoc:javadoc
+    
+    - mkdir $CIRCLE_ARTIFACTS/apidocs
+    
+    - mkdir $CIRCLE_ARTIFACTS/apidocs/org.nasdanika.codegen.ecore.editor
+    - mkdir $CIRCLE_ARTIFACTS/apidocs/org.nasdanika.codegen.ecore.edit
+    - mkdir $CIRCLE_ARTIFACTS/apidocs/org.nasdanika.codegen.ecore
+    
+    - mv org.nasdanika.codegen.ecore.editor/target/site/apidocs $CIRCLE_ARTIFACTS/apidocs/org.nasdanika.codegen.ecore.editor
+    - mv org.nasdanika.codegen.ecore.edit/target/site/apidocs $CIRCLE_ARTIFACTS/apidocs/org.nasdanika.codegen.ecore.edit
+    - mv org.nasdanika.codegen.ecore/target/site/apidocs $CIRCLE_ARTIFACTS/apidocs/org.nasdanika.ecore.codegen    
+    
+deployment:
+  staging:
+    branch: master
+    commands:      
+    - wget http://nasdanika.org/commons-net-1.4.1.jar
+    - wget http://nasdanika.org/jakarta-oro-2.0.8.jar    
+    - ant -verbose -f ftp-upload.xml -lib commons-net-1.4.1.jar:jakarta-oro-2.0.8.jar -Dftp.server=$DEPLOY_FTP_SERVER -Dftp.user=$DEPLOY_FTP_USER -Dftp.password=$DEPLOY_FTP_PASSWORD -Dcircle.artifacts=$CIRCLE_ARTIFACTS
