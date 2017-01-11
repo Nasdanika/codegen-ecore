@@ -72,26 +72,187 @@ public class EcoreItemProviderAdapterFactory extends EcoreAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.nasdanika.codegen.ecore.ECoreCodeGeneration} instances.
+	 * This keeps track of the one adapter used for all {@link org.nasdanika.codegen.ecore.EcoreCodeGenerator} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ECoreCodeGenerationItemProvider eCoreCodeGenerationItemProvider;
+	protected EcoreCodeGeneratorItemProvider ecoreCodeGeneratorItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.nasdanika.codegen.ecore.ECoreCodeGeneration}.
+	 * This creates an adapter for a {@link org.nasdanika.codegen.ecore.EcoreCodeGenerator}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createECoreCodeGenerationAdapter() {
-		if (eCoreCodeGenerationItemProvider == null) {
-			eCoreCodeGenerationItemProvider = new ECoreCodeGenerationItemProvider(this);
+	public Adapter createEcoreCodeGeneratorAdapter() {
+		if (ecoreCodeGeneratorItemProvider == null) {
+			ecoreCodeGeneratorItemProvider = new EcoreCodeGeneratorItemProvider(this);
 		}
 
-		return eCoreCodeGenerationItemProvider;
+		return ecoreCodeGeneratorItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.nasdanika.codegen.ecore.EPackageSource} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EPackageSourceItemProvider ePackageSourceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.nasdanika.codegen.ecore.EPackageSource}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEPackageSourceAdapter() {
+		if (ePackageSourceItemProvider == null) {
+			ePackageSourceItemProvider = new EPackageSourceItemProvider(this);
+		}
+
+		return ePackageSourceItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.nasdanika.codegen.ecore.Package} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PackageItemProvider packageItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.nasdanika.codegen.ecore.Package}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPackageAdapter() {
+		if (packageItemProvider == null) {
+			packageItemProvider = new PackageItemProvider(this);
+		}
+
+		return packageItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.nasdanika.codegen.ecore.Class} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ClassItemProvider classItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.nasdanika.codegen.ecore.Class}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createClassAdapter() {
+		if (classItemProvider == null) {
+			classItemProvider = new ClassItemProvider(this);
+		}
+
+		return classItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.nasdanika.codegen.ecore.Attribute} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AttributeItemProvider attributeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.nasdanika.codegen.ecore.Attribute}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAttributeAdapter() {
+		if (attributeItemProvider == null) {
+			attributeItemProvider = new AttributeItemProvider(this);
+		}
+
+		return attributeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.nasdanika.codegen.ecore.Reference} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ReferenceItemProvider referenceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.nasdanika.codegen.ecore.Reference}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createReferenceAdapter() {
+		if (referenceItemProvider == null) {
+			referenceItemProvider = new ReferenceItemProvider(this);
+		}
+
+		return referenceItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.nasdanika.codegen.ecore.Operation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OperationItemProvider operationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.nasdanika.codegen.ecore.Operation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOperationAdapter() {
+		if (operationItemProvider == null) {
+			operationItemProvider = new OperationItemProvider(this);
+		}
+
+		return operationItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.nasdanika.codegen.ecore.Parameter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ParameterItemProvider parameterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.nasdanika.codegen.ecore.Parameter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createParameterAdapter() {
+		if (parameterItemProvider == null) {
+			parameterItemProvider = new ParameterItemProvider(this);
+		}
+
+		return parameterItemProvider;
 	}
 
 	/**
@@ -193,7 +354,14 @@ public class EcoreItemProviderAdapterFactory extends EcoreAdapterFactory impleme
 	 * @generated
 	 */
 	public void dispose() {
-		if (eCoreCodeGenerationItemProvider != null) eCoreCodeGenerationItemProvider.dispose();
+		if (ecoreCodeGeneratorItemProvider != null) ecoreCodeGeneratorItemProvider.dispose();
+		if (ePackageSourceItemProvider != null) ePackageSourceItemProvider.dispose();
+		if (packageItemProvider != null) packageItemProvider.dispose();
+		if (classItemProvider != null) classItemProvider.dispose();
+		if (attributeItemProvider != null) attributeItemProvider.dispose();
+		if (referenceItemProvider != null) referenceItemProvider.dispose();
+		if (operationItemProvider != null) operationItemProvider.dispose();
+		if (parameterItemProvider != null) parameterItemProvider.dispose();
 	}
 
 }

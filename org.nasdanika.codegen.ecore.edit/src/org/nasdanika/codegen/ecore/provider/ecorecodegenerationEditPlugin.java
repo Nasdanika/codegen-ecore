@@ -5,6 +5,7 @@ package org.nasdanika.codegen.ecore.provider;
 import org.eclipse.emf.common.EMFPlugin;
 
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
 
 /**
  * This is the central singleton for the ecore-code-generation edit plugin.
@@ -38,6 +39,7 @@ public final class ecorecodegenerationEditPlugin extends EMFPlugin {
 	public ecorecodegenerationEditPlugin() {
 		super
 		  (new ResourceLocator [] {
+		     EcoreEditPlugin.INSTANCE,
 		   });
 	}
 

@@ -9,13 +9,13 @@
    <extension point="org.eclipse.ui.newWizards">
       <!-- @generated ecore-code-generation -->
       <category
-            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            id="org.nasdanika"
             name="%_UI_Wizard_category"/>
       <wizard
             id="org.nasdanika.codegen.ecore.presentation.EcoreModelWizardID"
             name="%_UI_EcoreModelWizard_label"
             class="org.nasdanika.codegen.ecore.presentation.EcoreModelWizard"
-            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            category="org.nasdanika"
             icon="icons/full/obj16/EcoreModelFile.gif">
          <description>%_UI_EcoreModelWizard_description</description>
          <selection class="org.eclipse.core.resources.IResource"/>
@@ -28,7 +28,7 @@
             id="org.nasdanika.codegen.ecore.presentation.EcoreEditorID"
             name="%_UI_EcoreEditor_label"
             icon="icons/full/obj16/EcoreModelFile.gif"
-            extensions="ecore"
+            extensions="nsd_ecore_gen"
             class="org.nasdanika.codegen.ecore.presentation.EcoreEditor"
             contributorClass="org.nasdanika.codegen.ecore.presentation.EcoreActionBarContributor">
       </editor>

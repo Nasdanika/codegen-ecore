@@ -10,7 +10,14 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.nasdanika.codegen.ecore.*;
+import org.nasdanika.codegen.ecore.Attribute;
+import org.nasdanika.codegen.ecore.EPackageSource;
+import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
+import org.nasdanika.codegen.ecore.EcoreFactory;
+import org.nasdanika.codegen.ecore.EcorePackage;
+import org.nasdanika.codegen.ecore.Operation;
+import org.nasdanika.codegen.ecore.Parameter;
+import org.nasdanika.codegen.ecore.Reference;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,7 +63,14 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case EcorePackage.ECORE_CODE_GENERATION: return (EObject)createECoreCodeGeneration();
+			case EcorePackage.ECORE_CODE_GENERATOR: return (EObject)createEcoreCodeGenerator();
+			case EcorePackage.EPACKAGE_SOURCE: return (EObject)createEPackageSource();
+			case EcorePackage.PACKAGE: return (EObject)createPackage();
+			case EcorePackage.CLASS: return (EObject)createClass();
+			case EcorePackage.ATTRIBUTE: return (EObject)createAttribute();
+			case EcorePackage.REFERENCE: return (EObject)createReference();
+			case EcorePackage.OPERATION: return (EObject)createOperation();
+			case EcorePackage.PARAMETER: return (EObject)createParameter();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -67,9 +81,79 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ECoreCodeGeneration createECoreCodeGeneration() {
-		ECoreCodeGenerationImpl eCoreCodeGeneration = new ECoreCodeGenerationImpl();
-		return eCoreCodeGeneration;
+	public EcoreCodeGenerator createEcoreCodeGenerator() {
+		EcoreCodeGeneratorImpl ecoreCodeGenerator = new EcoreCodeGeneratorImpl();
+		return ecoreCodeGenerator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EPackageSource createEPackageSource() {
+		EPackageSourceImpl ePackageSource = new EPackageSourceImpl();
+		return ePackageSource;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public org.nasdanika.codegen.ecore.Package createPackage() {
+		PackageImpl package_ = new PackageImpl();
+		return package_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public org.nasdanika.codegen.ecore.Class createClass() {
+		ClassImpl class_ = new ClassImpl();
+		return class_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Attribute createAttribute() {
+		AttributeImpl attribute = new AttributeImpl();
+		return attribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Reference createReference() {
+		ReferenceImpl reference = new ReferenceImpl();
+		return reference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation createOperation() {
+		OperationImpl operation = new OperationImpl();
+		return operation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Parameter createParameter() {
+		ParameterImpl parameter = new ParameterImpl();
+		return parameter;
 	}
 
 	/**

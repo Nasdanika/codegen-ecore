@@ -5,9 +5,6 @@ package org.nasdanika.codegen.ecore.provider;
 
 import java.util.Collection;
 import java.util.List;
-
-import org.eclipse.emf.cdo.edit.CDOItemProviderAdapter;
-
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
@@ -27,7 +24,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * @generated
  */
 public class ECoreCodeGenerationItemProvider 
-	extends CDOItemProviderAdapter
+	extends org.nasdanika.codegen.ecore.provider.CDOItemProviderAdapterEx
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

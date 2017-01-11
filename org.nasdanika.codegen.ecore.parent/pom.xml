@@ -19,24 +19,36 @@
 
 	<repositories>
 		
-			<repository>
-				<id>neon</id>
-				<url>http://download.eclipse.org/releases/neon</url>
-				<layout>p2</layout>
-			</repository>		
+		<repository>
+			<id>neon</id>
+			<url>http://download.eclipse.org/releases/neon</url>
+			<layout>p2</layout>
+		</repository>		
 		
-			<repository>
-				<id>orbit</id>
-				<url>http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository</url>
-				<layout>p2</layout>
-			</repository>
+		<repository>
+			<id>orbit</id>
+			<url>http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository</url>
+			<layout>p2</layout>
+		</repository>
 					
-			<repository>
-				<id>codegen</id>
-				<url>http://www.nasdanika.org/products/codegen/repository</url>
-				<layout>p2</layout>
-			</repository>		
+		<repository>
+			<id>codegen</id>
+			<url>http://www.nasdanika.org/products/codegen/repository</url>
+			<layout>p2</layout>
+		</repository>		
+
+		<repository>
+			<id>third-party</id>
+			<url>http://www.nasdanika.org/third-party/org.nasdanika.third-party.repository/target/repository</url>
+			<!-- <url>http://www.nasdanika.org/third_party_repository</url> -->
+			<layout>p2</layout>
+		</repository>
 		
+		<repository>
+			<id>maven-osgi</id>
+			<url>http://www.nasdanika.org/maven-osgi</url>
+			<layout>p2</layout>
+		</repository>
 	</repositories>
  	
  	<build>

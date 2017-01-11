@@ -83,16 +83,7 @@ If the project containing the generation model is a Java project, then Java clas
 * Modify the model wizard
   * Select source EPackages - from the registered packages, target platform, workspace packages, URL's
   * Select generation targets - from extension points
-* Form editors
-  * Registered with extension points
-  * Different levels:
-    * EClassifier
-    * EStructuralFeature
-    * EOperation
-    * EParameter
-    * ... 
-  * Default implementations leveraging ``org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor()``
-  * Context help for form elements generated from model documentation annotations.
+* Integrate EMF Forms, customize to display context help for form elements generated from model documentation annotations.
 * Code generation dialog - selection of targets, remembering last using targets in the model.
 
 ## How to contribute
