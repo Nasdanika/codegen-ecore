@@ -24,7 +24,7 @@ test:
     
     - mv org.nasdanika.codegen.ecore.editor/target/site/apidocs $CIRCLE_ARTIFACTS/apidocs/org.nasdanika.codegen.ecore.editor
     - mv org.nasdanika.codegen.ecore.edit/target/site/apidocs $CIRCLE_ARTIFACTS/apidocs/org.nasdanika.codegen.ecore.edit
-    - mv org.nasdanika.codegen.ecore/target/site/apidocs $CIRCLE_ARTIFACTS/apidocs/org.nasdanika.ecore.codegen    
+    - mv org.nasdanika.codegen.ecore/target/site/apidocs $CIRCLE_ARTIFACTS/apidocs/org.nasdanika.codegen.ecore    
     
 deployment:
   staging:
