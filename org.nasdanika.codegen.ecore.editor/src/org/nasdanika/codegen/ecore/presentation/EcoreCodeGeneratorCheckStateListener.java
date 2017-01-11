@@ -23,9 +23,9 @@ public class EcoreCodeGeneratorCheckStateListener implements ICheckStateListener
 	private WritableValue<EcoreCodeGenerator> eCoreCodeGeneratorWritableValue;
 	private CheckboxTreeViewer checkboxTreeViewer;
 
-	public EcoreCodeGeneratorCheckStateListener(EditingDomain editingDomain, WritableValue<EcoreCodeGenerator> ÂCoreCodeGeneratorWritableValue, CheckboxTreeViewer checkboxTreeViewer) {
+	public EcoreCodeGeneratorCheckStateListener(EditingDomain editingDomain, WritableValue<EcoreCodeGenerator> eCoreCodeGeneratorWritableValue, CheckboxTreeViewer checkboxTreeViewer) {
 		this.editingDomain = editingDomain;
-		this.eCoreCodeGeneratorWritableValue = ÂCoreCodeGeneratorWritableValue;
+		this.eCoreCodeGeneratorWritableValue = eCoreCodeGeneratorWritableValue;
 		this.checkboxTreeViewer = checkboxTreeViewer;
 		refreshCommand = new AbstractCommand() {
 
