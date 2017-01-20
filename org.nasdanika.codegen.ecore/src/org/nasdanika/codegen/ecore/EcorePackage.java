@@ -1033,14 +1033,14 @@ public interface EcorePackage extends EPackage {
 	int PARAMETER_OPERATION_COUNT = MODEL_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.nasdanika.codegen.ecore.impl.ConfigurationImpl <em>Configuration</em>}' class.
+	 * The meta object id for the '{@link org.nasdanika.codegen.ecore.impl.ConfigurationEntryImpl <em>Configuration Entry</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.nasdanika.codegen.ecore.impl.ConfigurationImpl
-	 * @see org.nasdanika.codegen.ecore.impl.EcorePackageImpl#getConfiguration()
+	 * @see org.nasdanika.codegen.ecore.impl.ConfigurationEntryImpl
+	 * @see org.nasdanika.codegen.ecore.impl.EcorePackageImpl#getConfigurationEntry()
 	 * @generated
 	 */
-	int CONFIGURATION = 11;
+	int CONFIGURATION_ENTRY = 11;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1049,7 +1049,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION__ID = 0;
+	int CONFIGURATION_ENTRY__ID = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1058,26 +1058,98 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION__NAME = 1;
+	int CONFIGURATION_ENTRY__NAME = 1;
 
 	/**
-	 * The number of structural features of the '<em>Configuration</em>' class.
+	 * The feature id for the '<em><b>Configuration</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_FEATURE_COUNT = 2;
+	int CONFIGURATION_ENTRY__CONFIGURATION = 2;
 
 	/**
-	 * The number of operations of the '<em>Configuration</em>' class.
+	 * The number of structural features of the '<em>Configuration Entry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_OPERATION_COUNT = 0;
+	int CONFIGURATION_ENTRY_FEATURE_COUNT = 3;
 
+	/**
+	 * The number of operations of the '<em>Configuration Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION_ENTRY_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.nasdanika.codegen.ecore.impl.EcoreCodeGeneratorConfigurationImpl <em>Code Generator Configuration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.nasdanika.codegen.ecore.impl.EcoreCodeGeneratorConfigurationImpl
+	 * @see org.nasdanika.codegen.ecore.impl.EcorePackageImpl#getEcoreCodeGeneratorConfiguration()
+	 * @generated
+	 */
+	int ECORE_CODE_GENERATOR_CONFIGURATION = 12;
+
+	/**
+	 * The feature id for the '<em><b>Target Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_CODE_GENERATOR_CONFIGURATION__TARGET_PROJECT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Source Folder</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_CODE_GENERATOR_CONFIGURATION__SOURCE_FOLDER = 1;
+
+	/**
+	 * The feature id for the '<em><b>Base Package</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_CODE_GENERATOR_CONFIGURATION__BASE_PACKAGE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_CODE_GENERATOR_CONFIGURATION__DESCRIPTION = 3;
+
+	/**
+	 * The number of structural features of the '<em>Code Generator Configuration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_CODE_GENERATOR_CONFIGURATION_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Code Generator Configuration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_CODE_GENERATOR_CONFIGURATION_OPERATION_COUNT = 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.nasdanika.codegen.ecore.EcoreCodeGenerator <em>Code Generator</em>}'.
@@ -1407,36 +1479,101 @@ public interface EcorePackage extends EPackage {
 	EClass getMember();
 
 	/**
-	 * Returns the meta object for class '{@link org.nasdanika.codegen.ecore.Configuration <em>Configuration</em>}'.
+	 * Returns the meta object for class '{@link org.nasdanika.codegen.ecore.ConfigurationEntry <em>Configuration Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Configuration</em>'.
-	 * @see org.nasdanika.codegen.ecore.Configuration
+	 * @return the meta object for class '<em>Configuration Entry</em>'.
+	 * @see org.nasdanika.codegen.ecore.ConfigurationEntry
 	 * @generated
 	 */
-	EClass getConfiguration();
+	EClass getConfigurationEntry();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.nasdanika.codegen.ecore.Configuration#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link org.nasdanika.codegen.ecore.ConfigurationEntry#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see org.nasdanika.codegen.ecore.Configuration#getId()
-	 * @see #getConfiguration()
+	 * @see org.nasdanika.codegen.ecore.ConfigurationEntry#getId()
+	 * @see #getConfigurationEntry()
 	 * @generated
 	 */
-	EAttribute getConfiguration_Id();
+	EAttribute getConfigurationEntry_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.nasdanika.codegen.ecore.Configuration#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.nasdanika.codegen.ecore.ConfigurationEntry#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.nasdanika.codegen.ecore.Configuration#getName()
-	 * @see #getConfiguration()
+	 * @see org.nasdanika.codegen.ecore.ConfigurationEntry#getName()
+	 * @see #getConfigurationEntry()
 	 * @generated
 	 */
-	EAttribute getConfiguration_Name();
+	EAttribute getConfigurationEntry_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.nasdanika.codegen.ecore.ConfigurationEntry#getConfiguration <em>Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Configuration</em>'.
+	 * @see org.nasdanika.codegen.ecore.ConfigurationEntry#getConfiguration()
+	 * @see #getConfigurationEntry()
+	 * @generated
+	 */
+	EReference getConfigurationEntry_Configuration();
+
+	/**
+	 * Returns the meta object for class '{@link org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration <em>Code Generator Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Code Generator Configuration</em>'.
+	 * @see org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration
+	 * @generated
+	 */
+	EClass getEcoreCodeGeneratorConfiguration();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration#getTargetProject <em>Target Project</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Target Project</em>'.
+	 * @see org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration#getTargetProject()
+	 * @see #getEcoreCodeGeneratorConfiguration()
+	 * @generated
+	 */
+	EAttribute getEcoreCodeGeneratorConfiguration_TargetProject();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration#getSourceFolder <em>Source Folder</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Source Folder</em>'.
+	 * @see org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration#getSourceFolder()
+	 * @see #getEcoreCodeGeneratorConfiguration()
+	 * @generated
+	 */
+	EAttribute getEcoreCodeGeneratorConfiguration_SourceFolder();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration#getBasePackage <em>Base Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Base Package</em>'.
+	 * @see org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration#getBasePackage()
+	 * @see #getEcoreCodeGeneratorConfiguration()
+	 * @generated
+	 */
+	EAttribute getEcoreCodeGeneratorConfiguration_BasePackage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration#getDescription()
+	 * @see #getEcoreCodeGeneratorConfiguration()
+	 * @generated
+	 */
+	EAttribute getEcoreCodeGeneratorConfiguration_Description();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1701,28 +1838,72 @@ public interface EcorePackage extends EPackage {
 		 */
 		EClass MEMBER = eINSTANCE.getMember();
 		/**
-		 * The meta object literal for the '{@link org.nasdanika.codegen.ecore.impl.ConfigurationImpl <em>Configuration</em>}' class.
+		 * The meta object literal for the '{@link org.nasdanika.codegen.ecore.impl.ConfigurationEntryImpl <em>Configuration Entry</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.nasdanika.codegen.ecore.impl.ConfigurationImpl
-		 * @see org.nasdanika.codegen.ecore.impl.EcorePackageImpl#getConfiguration()
+		 * @see org.nasdanika.codegen.ecore.impl.ConfigurationEntryImpl
+		 * @see org.nasdanika.codegen.ecore.impl.EcorePackageImpl#getConfigurationEntry()
 		 * @generated
 		 */
-		EClass CONFIGURATION = eINSTANCE.getConfiguration();
+		EClass CONFIGURATION_ENTRY = eINSTANCE.getConfigurationEntry();
 		/**
 		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONFIGURATION__ID = eINSTANCE.getConfiguration_Id();
+		EAttribute CONFIGURATION_ENTRY__ID = eINSTANCE.getConfigurationEntry_Id();
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONFIGURATION__NAME = eINSTANCE.getConfiguration_Name();
+		EAttribute CONFIGURATION_ENTRY__NAME = eINSTANCE.getConfigurationEntry_Name();
+		/**
+		 * The meta object literal for the '<em><b>Configuration</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONFIGURATION_ENTRY__CONFIGURATION = eINSTANCE.getConfigurationEntry_Configuration();
+		/**
+		 * The meta object literal for the '{@link org.nasdanika.codegen.ecore.impl.EcoreCodeGeneratorConfigurationImpl <em>Code Generator Configuration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.nasdanika.codegen.ecore.impl.EcoreCodeGeneratorConfigurationImpl
+		 * @see org.nasdanika.codegen.ecore.impl.EcorePackageImpl#getEcoreCodeGeneratorConfiguration()
+		 * @generated
+		 */
+		EClass ECORE_CODE_GENERATOR_CONFIGURATION = eINSTANCE.getEcoreCodeGeneratorConfiguration();
+		/**
+		 * The meta object literal for the '<em><b>Target Project</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECORE_CODE_GENERATOR_CONFIGURATION__TARGET_PROJECT = eINSTANCE.getEcoreCodeGeneratorConfiguration_TargetProject();
+		/**
+		 * The meta object literal for the '<em><b>Source Folder</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECORE_CODE_GENERATOR_CONFIGURATION__SOURCE_FOLDER = eINSTANCE.getEcoreCodeGeneratorConfiguration_SourceFolder();
+		/**
+		 * The meta object literal for the '<em><b>Base Package</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECORE_CODE_GENERATOR_CONFIGURATION__BASE_PACKAGE = eINSTANCE.getEcoreCodeGeneratorConfiguration_BasePackage();
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECORE_CODE_GENERATOR_CONFIGURATION__DESCRIPTION = eINSTANCE.getEcoreCodeGeneratorConfiguration_Description();
 
 	}
 

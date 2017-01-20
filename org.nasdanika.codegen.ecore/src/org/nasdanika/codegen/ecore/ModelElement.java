@@ -112,7 +112,7 @@ public interface ModelElement extends CDOObject {
 
 	/**
 	 * Returns the value of the '<em><b>Configuration</b></em>' containment reference list.
-	 * The list contents are of type {@link org.nasdanika.codegen.ecore.Configuration}.
+	 * The list contents are of type {@link org.nasdanika.codegen.ecore.ConfigurationEntry}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -123,7 +123,7 @@ public interface ModelElement extends CDOObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Configuration> getConfiguration();
+	EList<ConfigurationEntry> getConfiguration();
 
 	/**
 	 * Returns the value of the '<em><b>Last Generation Targets</b></em>' attribute list.

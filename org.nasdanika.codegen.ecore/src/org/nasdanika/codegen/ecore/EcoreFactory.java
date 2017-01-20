@@ -94,6 +94,24 @@ public interface EcoreFactory extends EFactory {
 	Parameter createParameter();
 
 	/**
+	 * Returns a new object of class '<em>Configuration Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Configuration Entry</em>'.
+	 * @generated
+	 */
+	ConfigurationEntry createConfigurationEntry();
+
+	/**
+	 * Returns a new object of class '<em>Code Generator Configuration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Code Generator Configuration</em>'.
+	 * @generated
+	 */
+	EcoreCodeGeneratorConfiguration createEcoreCodeGeneratorConfiguration();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

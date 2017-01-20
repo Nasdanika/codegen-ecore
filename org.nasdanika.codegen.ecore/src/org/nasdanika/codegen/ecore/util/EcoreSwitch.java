@@ -8,9 +8,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
 import org.nasdanika.codegen.ecore.Attribute;
-import org.nasdanika.codegen.ecore.Configuration;
+import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EPackageSource;
 import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
+import org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration;
 import org.nasdanika.codegen.ecore.EcorePackage;
 import org.nasdanika.codegen.ecore.Member;
 import org.nasdanika.codegen.ecore.ModelElement;
@@ -157,9 +158,15 @@ public class EcoreSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EcorePackage.CONFIGURATION: {
-				Configuration configuration = (Configuration)theEObject;
-				T result = caseConfiguration(configuration);
+			case EcorePackage.CONFIGURATION_ENTRY: {
+				ConfigurationEntry configurationEntry = (ConfigurationEntry)theEObject;
+				T result = caseConfigurationEntry(configurationEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EcorePackage.ECORE_CODE_GENERATOR_CONFIGURATION: {
+				EcoreCodeGeneratorConfiguration ecoreCodeGeneratorConfiguration = (EcoreCodeGeneratorConfiguration)theEObject;
+				T result = caseEcoreCodeGeneratorConfiguration(ecoreCodeGeneratorConfiguration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -333,17 +340,32 @@ public class EcoreSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Configuration</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Configuration Entry</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Configuration</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Configuration Entry</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConfiguration(Configuration object) {
+	public T caseConfigurationEntry(ConfigurationEntry object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Code Generator Configuration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Code Generator Configuration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEcoreCodeGeneratorConfiguration(EcoreCodeGeneratorConfiguration object) {
 		return null;
 	}
 

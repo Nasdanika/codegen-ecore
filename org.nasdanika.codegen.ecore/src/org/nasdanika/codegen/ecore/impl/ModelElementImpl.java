@@ -10,8 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
 
 import org.eclipse.emf.internal.cdo.CDOObjectImpl;
-
-import org.nasdanika.codegen.ecore.Configuration;
+import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EcorePackage;
 import org.nasdanika.codegen.ecore.ModelElement;
 
@@ -122,8 +121,8 @@ public abstract class ModelElementImpl extends CDOObjectImpl implements ModelEle
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
-	public EList<Configuration> getConfiguration() {
-		return (EList<Configuration>)eGet(EcorePackage.Literals.MODEL_ELEMENT__CONFIGURATION, true);
+	public EList<ConfigurationEntry> getConfiguration() {
+		return (EList<ConfigurationEntry>)eGet(EcorePackage.Literals.MODEL_ELEMENT__CONFIGURATION, true);
 	}
 
 	/**

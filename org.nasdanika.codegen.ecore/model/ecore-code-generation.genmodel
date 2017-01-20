@@ -52,9 +52,16 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//Parameter/many"/>
     </genClasses>
     <genClasses image="false" ecoreClass="ecore-code-generation.ecore#//Member"/>
-    <genClasses ecoreClass="ecore-code-generation.ecore#//Configuration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//Configuration/id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//Configuration/name"/>
+    <genClasses image="false" ecoreClass="ecore-code-generation.ecore#//ConfigurationEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//ConfigurationEntry/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//ConfigurationEntry/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecore-code-generation.ecore#//ConfigurationEntry/configuration"/>
+    </genClasses>
+    <genClasses ecoreClass="ecore-code-generation.ecore#//EcoreCodeGeneratorConfiguration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//EcoreCodeGeneratorConfiguration/targetProject"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//EcoreCodeGeneratorConfiguration/sourceFolder"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//EcoreCodeGeneratorConfiguration/basePackage"/>
+      <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//EcoreCodeGeneratorConfiguration/description"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

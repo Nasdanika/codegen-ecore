@@ -11,8 +11,10 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import org.nasdanika.codegen.ecore.Attribute;
+import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EPackageSource;
 import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
+import org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration;
 import org.nasdanika.codegen.ecore.EcoreFactory;
 import org.nasdanika.codegen.ecore.EcorePackage;
 import org.nasdanika.codegen.ecore.Operation;
@@ -71,6 +73,8 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 			case EcorePackage.REFERENCE: return (EObject)createReference();
 			case EcorePackage.OPERATION: return (EObject)createOperation();
 			case EcorePackage.PARAMETER: return (EObject)createParameter();
+			case EcorePackage.CONFIGURATION_ENTRY: return (EObject)createConfigurationEntry();
+			case EcorePackage.ECORE_CODE_GENERATOR_CONFIGURATION: return (EObject)createEcoreCodeGeneratorConfiguration();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -154,6 +158,26 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	public Parameter createParameter() {
 		ParameterImpl parameter = new ParameterImpl();
 		return parameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConfigurationEntry createConfigurationEntry() {
+		ConfigurationEntryImpl configurationEntry = new ConfigurationEntryImpl();
+		return configurationEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EcoreCodeGeneratorConfiguration createEcoreCodeGeneratorConfiguration() {
+		EcoreCodeGeneratorConfigurationImpl ecoreCodeGeneratorConfiguration = new EcoreCodeGeneratorConfigurationImpl();
+		return ecoreCodeGeneratorConfiguration;
 	}
 
 	/**

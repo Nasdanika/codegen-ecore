@@ -12,6 +12,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcoreFactory;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -23,17 +24,16 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.nasdanika.codegen.ecore.EcoreFactory;
+import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EcorePackage;
-import org.nasdanika.codegen.ecore.ModelElement;
 
 /**
- * This is the item provider adapter for a {@link org.nasdanika.codegen.ecore.ModelElement} object.
+ * This is the item provider adapter for a {@link org.nasdanika.codegen.ecore.ConfigurationEntry} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ModelElementItemProvider 
+public class ConfigurationEntryItemProvider 
 	extends CDOItemProviderAdapterEx
 	implements
 		IEditingDomainItemProvider,
@@ -47,9 +47,20 @@ public class ModelElementItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelElementItemProvider(AdapterFactory adapterFactory) {
+	public ConfigurationEntryItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
+	
+	/**
+	 * This returns EcoreCodeGeneratorConfiguration.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ConfigurationEntry.png"));
+	}	
 
 	/**
 	 * This returns the property descriptors for the adapted class.
@@ -62,50 +73,26 @@ public class ModelElementItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSelectedPropertyDescriptor(object);
-			addDescriptionPropertyDescriptor(object);
+			addIdPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
-			addLastGenerationTargetsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Selected feature.
+	 * This adds a property descriptor for the Id feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSelectedPropertyDescriptor(Object object) {
+	protected void addIdPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ModelElement_selected_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelElement_selected_feature", "_UI_ModelElement_type"),
-				 EcorePackage.Literals.MODEL_ELEMENT__SELECTED,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Description feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDescriptionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ModelElement_description_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelElement_description_feature", "_UI_ModelElement_type"),
-				 EcorePackage.Literals.MODEL_ELEMENT__DESCRIPTION,
+				 getString("_UI_ConfigurationEntry_id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ConfigurationEntry_id_feature", "_UI_ConfigurationEntry_type"),
+				 EcorePackage.Literals.CONFIGURATION_ENTRY__ID,
 				 true,
 				 false,
 				 false,
@@ -125,31 +112,9 @@ public class ModelElementItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ModelElement_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelElement_name_feature", "_UI_ModelElement_type"),
-				 EcorePackage.Literals.MODEL_ELEMENT__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Last Generation Targets feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addLastGenerationTargetsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ModelElement_lastGenerationTargets_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelElement_lastGenerationTargets_feature", "_UI_ModelElement_type"),
-				 EcorePackage.Literals.MODEL_ELEMENT__LAST_GENERATION_TARGETS,
+				 getString("_UI_ConfigurationEntry_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ConfigurationEntry_name_feature", "_UI_ConfigurationEntry_type"),
+				 EcorePackage.Literals.CONFIGURATION_ENTRY__NAME,
 				 true,
 				 false,
 				 false,
@@ -170,7 +135,7 @@ public class ModelElementItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(EcorePackage.Literals.MODEL_ELEMENT__CONFIGURATION);
+			childrenFeatures.add(EcorePackage.Literals.CONFIGURATION_ENTRY__CONFIGURATION);
 		}
 		return childrenFeatures;
 	}
@@ -196,10 +161,10 @@ public class ModelElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ModelElement)object).getName();
+		String label = ((ConfigurationEntry)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ModelElement_type") :
-			getString("_UI_ModelElement_type") + " " + label;
+			getString("_UI_ConfigurationEntry_type") :
+			getString("_UI_ConfigurationEntry_type") + " " + label;
 	}
 	
 
@@ -208,22 +173,18 @@ public class ModelElementItemProvider
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ModelElement.class)) {
-			case EcorePackage.MODEL_ELEMENT__SELECTED:
-			case EcorePackage.MODEL_ELEMENT__DESCRIPTION:
-			case EcorePackage.MODEL_ELEMENT__LAST_GENERATION_TARGETS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, false));
+		switch (notification.getFeatureID(ConfigurationEntry.class)) {
+			case EcorePackage.CONFIGURATION_ENTRY__ID:
+			case EcorePackage.CONFIGURATION_ENTRY__NAME:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case EcorePackage.MODEL_ELEMENT__NAME:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, true));
-				return;
-			case EcorePackage.MODEL_ELEMENT__CONFIGURATION:
+			case EcorePackage.CONFIGURATION_ENTRY__CONFIGURATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -243,8 +204,8 @@ public class ModelElementItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(EcorePackage.Literals.MODEL_ELEMENT__CONFIGURATION,
-				 EcoreFactory.eINSTANCE.createConfigurationEntry()));
+				(EcorePackage.Literals.CONFIGURATION_ENTRY__CONFIGURATION,
+				 EcoreFactory.eINSTANCE.createEObject()));
 	}
 
 	/**

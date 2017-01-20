@@ -256,6 +256,52 @@ public class EcoreItemProviderAdapterFactory extends EcoreAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.nasdanika.codegen.ecore.ConfigurationEntry} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ConfigurationEntryItemProvider configurationEntryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.nasdanika.codegen.ecore.ConfigurationEntry}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createConfigurationEntryAdapter() {
+		if (configurationEntryItemProvider == null) {
+			configurationEntryItemProvider = new ConfigurationEntryItemProvider(this);
+		}
+
+		return configurationEntryItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EcoreCodeGeneratorConfigurationItemProvider ecoreCodeGeneratorConfigurationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEcoreCodeGeneratorConfigurationAdapter() {
+		if (ecoreCodeGeneratorConfigurationItemProvider == null) {
+			ecoreCodeGeneratorConfigurationItemProvider = new EcoreCodeGeneratorConfigurationItemProvider(this);
+		}
+
+		return ecoreCodeGeneratorConfigurationItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -362,6 +408,8 @@ public class EcoreItemProviderAdapterFactory extends EcoreAdapterFactory impleme
 		if (referenceItemProvider != null) referenceItemProvider.dispose();
 		if (operationItemProvider != null) operationItemProvider.dispose();
 		if (parameterItemProvider != null) parameterItemProvider.dispose();
+		if (configurationEntryItemProvider != null) configurationEntryItemProvider.dispose();
+		if (ecoreCodeGeneratorConfigurationItemProvider != null) ecoreCodeGeneratorConfigurationItemProvider.dispose();
 	}
 
 }

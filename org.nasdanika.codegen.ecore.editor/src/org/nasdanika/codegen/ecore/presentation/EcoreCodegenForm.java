@@ -1,7 +1,10 @@
 package org.nasdanika.codegen.ecore.presentation;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.ChangeEvent;
@@ -24,9 +27,13 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecp.ui.view.ECPRendererException;
+import org.eclipse.emf.ecp.ui.view.swt.ECPSWTViewRenderer;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.action.Action;
@@ -34,6 +41,7 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.databinding.viewers.ViewerProperties;
 import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
@@ -41,7 +49,10 @@ import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.layout.FillLayout;
@@ -57,12 +68,15 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.dialogs.ContainerCheckedTreeViewer;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.wb.swt.ResourceManager;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
 import org.nasdanika.codegen.ecore.EcoreFactory;
+import org.nasdanika.codegen.ecore.ModelElement;
 import org.nasdanika.codegen.presentation.JavaProjectClassLoader;
 import org.nasdanika.config.MutableContext;
 import org.nasdanika.config.SimpleMutableContext;
@@ -90,6 +104,8 @@ public class EcoreCodegenForm extends Composite {
 	private WritableValue<String> filterValue = new WritableValue<>();
 	private WritableValue<EObject> selectionWritableValue = new WritableValue<>();
 	private CheckboxTreeViewer checkboxTreeViewer;
+	private Composite configurationComposite;
+	private EditingDomain editingDomain;
 	
 	/**
 	 * Create the composite.
@@ -108,6 +124,8 @@ public class EcoreCodegenForm extends Composite {
 			AdapterFactory adapterFactory) {
 		
 		super(parent, style);
+		this.editingDomain = editingDomain;
+		
 		addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent e) {
 				toolkit.dispose();
@@ -338,7 +356,20 @@ public class EcoreCodegenForm extends Composite {
 			
 		});
 		
-		checkboxTreeViewer.addCheckStateListener(new EcoreCodeGeneratorCheckStateListener(editingDomain, generatorWritableValue, checkboxTreeViewer));
+		checkboxTreeViewer.addCheckStateListener(new EcoreCodeGeneratorCheckStateListener(editingDomain, generatorWritableValue, checkboxTreeViewer) {
+			
+			@Override
+			public void checkStateChanged(CheckStateChangedEvent event) {
+				super.checkStateChanged(event);
+				if (event.getChecked()) {
+					renderConfiguration(event.getElement());
+				} else {
+					renderConfiguration(null);
+				}
+			}
+			
+		});
+		
 		checkboxTreeViewer.setCheckStateProvider(new EcoreCodeGeneratorCheckStateProvider(generatorWritableValue, (ITreeContentProvider) checkboxTreeViewer.getContentProvider()));
 		
 		checkboxTreeViewer.setInput(generatorWritableValue);
@@ -367,9 +398,10 @@ public class EcoreCodegenForm extends Composite {
 		sctnConfiguration.setText("Configuration");
 		sctnConfiguration.setExpanded(true);
 		
-		Composite configurationComposite = toolkit.createComposite(sctnConfiguration, SWT.NONE);
+		configurationComposite = toolkit.createComposite(sctnConfiguration, SWT.NONE);
 		toolkit.paintBordersFor(configurationComposite);
 		sctnConfiguration.setClient(configurationComposite);
+		configurationComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
 //		configurationComposite.setLayout(new GridLayout(3, false));
 		
 					
@@ -389,7 +421,6 @@ public class EcoreCodegenForm extends Composite {
 					docBuilder.append("</UL>").append(System.lineSeparator());					
 					browser.setText(docBuilder.toString());
 					
-					// TODO - targets.
 				} else if (selection instanceof EModelElement) {
 					// Element information
 					MutableContext docContext = new SimpleMutableContext();
@@ -417,9 +448,9 @@ public class EcoreCodegenForm extends Composite {
 						e.printStackTrace();
 						browser.setText("Error");
 					}
-					
-					// TODO - tabs config forms.
-				}				
+				}	
+				renderConfiguration(checkboxTreeViewer.getChecked(selection) ? selection : null);
+				
 			}
 			
 		});
@@ -462,6 +493,86 @@ public class EcoreCodegenForm extends Composite {
 			}
 			
 		});
+	}
+	
+	private CTabFolder configurationTabFolder;
+	
+	private void renderConfiguration(Object selection) {
+		if (configurationTabFolder != null) {
+			configurationTabFolder.dispose();
+		}
+		
+		if (selection != null) {			
+			String label = ("Update configuration entries ") + checkboxTreeViewer.getTree().getSelection()[0].getText();
+			List<ConfigurationEntry> configuration = new ArrayList<>();
+			RecordingCommand recordingCommand = new RecordingCommand((TransactionalEditingDomain) editingDomain, label) {
+
+				@Override
+				protected void doExecute() {
+					EcoreCodeGenerator eCoreCodeGenerator = generatorWritableValue.getValue();
+					if (selection == eCoreCodeGenerator) {
+						updateConfiguration(eCoreCodeGenerator);
+						configuration.addAll(eCoreCodeGenerator.getConfiguration());
+					} else if (selection instanceof EModelElement) {
+						ModelElement me = eCoreCodeGenerator.find((EModelElement) selection, true);
+						updateConfiguration(me);
+						configuration.addAll(me.getConfiguration());
+					}
+				}
+				
+			};
+
+			editingDomain.getCommandStack().execute(recordingCommand);			
+
+			if (!configuration.isEmpty()) {
+				configurationTabFolder = new CTabFolder(configurationComposite, SWT.BORDER);
+				toolkit.adapt(configurationTabFolder);
+				toolkit.paintBordersFor(configurationTabFolder);
+				configurationTabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+				
+				Collections.sort(configuration, (a,b) -> a.getName().compareTo(b.getName()));
+				for (ConfigurationEntry ce: configuration) {							
+					CTabItem tabItem = new CTabItem(configurationTabFolder, SWT.NONE);
+					tabItem.setText(ce.getName());
+
+					ScrolledForm scrolledForm = toolkit.createScrolledForm(configurationTabFolder);
+					scrolledForm.getBody().setLayout(new GridLayout());
+					tabItem.setControl(scrolledForm);
+					toolkit.paintBordersFor(scrolledForm);
+					renderConfiguration(ce.getConfiguration(), scrolledForm.getBody());														
+				}
+				configurationTabFolder.setSelection(0);
+			}					
+		}
+		
+		configurationComposite.layout();		
+	}
+	
+	private void renderConfiguration(EObject configuration, Composite parent) {
+		// TODO - EMF forms is default behavior, from extensions here.
+		try {
+			ECPSWTViewRenderer.INSTANCE.render(parent, configuration);
+		} catch (ECPRendererException e) {
+			Label lblNewLabel = new Label(parent, SWT.NONE);
+			toolkit.adapt(lblNewLabel, true, true);
+			lblNewLabel.setText("Error rendering form: "+e);			
+		}		
+	}
+	
+	private void updateConfiguration(ModelElement modelElement) {
+		// TODO - inspect current configuration entries and create new ones if needed.
+		if (modelElement instanceof EcoreCodeGenerator) {
+			for (ConfigurationEntry ce: modelElement.getConfiguration()) {
+				if ("general".equals(ce.getId())) {
+					return;
+				}
+			}
+			ConfigurationEntry general = EcoreFactory.eINSTANCE.createConfigurationEntry();
+			general.setId("general");
+			general.setName("General");
+			general.setConfiguration(EcoreFactory.eINSTANCE.createEcoreCodeGeneratorConfiguration());
+			modelElement.getConfiguration().add(general);
+		}
 	}
 	
 	protected DataBindingContext initDataBindings() {

@@ -10,9 +10,10 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import org.nasdanika.codegen.ecore.Attribute;
-import org.nasdanika.codegen.ecore.Configuration;
+import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EPackageSource;
 import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
+import org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration;
 import org.nasdanika.codegen.ecore.EcorePackage;
 import org.nasdanika.codegen.ecore.Member;
 import org.nasdanika.codegen.ecore.ModelElement;
@@ -122,8 +123,12 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 				return createMemberAdapter();
 			}
 			@Override
-			public Adapter caseConfiguration(Configuration object) {
-				return createConfigurationAdapter();
+			public Adapter caseConfigurationEntry(ConfigurationEntry object) {
+				return createConfigurationEntryAdapter();
+			}
+			@Override
+			public Adapter caseEcoreCodeGeneratorConfiguration(EcoreCodeGeneratorConfiguration object) {
+				return createEcoreCodeGeneratorConfigurationAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -300,16 +305,30 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.nasdanika.codegen.ecore.Configuration <em>Configuration</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.nasdanika.codegen.ecore.ConfigurationEntry <em>Configuration Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.nasdanika.codegen.ecore.Configuration
+	 * @see org.nasdanika.codegen.ecore.ConfigurationEntry
 	 * @generated
 	 */
-	public Adapter createConfigurationAdapter() {
+	public Adapter createConfigurationEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration <em>Code Generator Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration
+	 * @generated
+	 */
+	public Adapter createEcoreCodeGeneratorConfigurationAdapter() {
 		return null;
 	}
 

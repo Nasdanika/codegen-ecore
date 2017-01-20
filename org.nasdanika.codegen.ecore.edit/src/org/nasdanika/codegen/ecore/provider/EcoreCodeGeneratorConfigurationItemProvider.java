@@ -21,16 +21,16 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.nasdanika.codegen.ecore.Configuration;
+import org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration;
 import org.nasdanika.codegen.ecore.EcorePackage;
 
 /**
- * This is the item provider adapter for a {@link org.nasdanika.codegen.ecore.Configuration} object.
+ * This is the item provider adapter for a {@link org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ConfigurationItemProvider 
+public class EcoreCodeGeneratorConfigurationItemProvider 
 	extends CDOItemProviderAdapterEx
 	implements
 		IEditingDomainItemProvider,
@@ -44,7 +44,7 @@ public class ConfigurationItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConfigurationItemProvider(AdapterFactory adapterFactory) {
+	public EcoreCodeGeneratorConfigurationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -59,26 +59,28 @@ public class ConfigurationItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addIdPropertyDescriptor(object);
-			addNamePropertyDescriptor(object);
+			addTargetProjectPropertyDescriptor(object);
+			addSourceFolderPropertyDescriptor(object);
+			addBasePackagePropertyDescriptor(object);
+			addDescriptionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Id feature.
+	 * This adds a property descriptor for the Target Project feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIdPropertyDescriptor(Object object) {
+	protected void addTargetProjectPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Configuration_id_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Configuration_id_feature", "_UI_Configuration_type"),
-				 EcorePackage.Literals.CONFIGURATION__ID,
+				 getString("_UI_EcoreCodeGeneratorConfiguration_targetProject_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EcoreCodeGeneratorConfiguration_targetProject_feature", "_UI_EcoreCodeGeneratorConfiguration_type"),
+				 EcorePackage.Literals.ECORE_CODE_GENERATOR_CONFIGURATION__TARGET_PROJECT,
 				 true,
 				 false,
 				 false,
@@ -88,19 +90,19 @@ public class ConfigurationItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This adds a property descriptor for the Source Folder feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
+	protected void addSourceFolderPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Configuration_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Configuration_name_feature", "_UI_Configuration_type"),
-				 EcorePackage.Literals.CONFIGURATION__NAME,
+				 getString("_UI_EcoreCodeGeneratorConfiguration_sourceFolder_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EcoreCodeGeneratorConfiguration_sourceFolder_feature", "_UI_EcoreCodeGeneratorConfiguration_type"),
+				 EcorePackage.Literals.ECORE_CODE_GENERATOR_CONFIGURATION__SOURCE_FOLDER,
 				 true,
 				 false,
 				 false,
@@ -110,14 +112,58 @@ public class ConfigurationItemProvider
 	}
 
 	/**
-	 * This returns Configuration.gif.
+	 * This adds a property descriptor for the Base Package feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addBasePackagePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EcoreCodeGeneratorConfiguration_basePackage_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EcoreCodeGeneratorConfiguration_basePackage_feature", "_UI_EcoreCodeGeneratorConfiguration_type"),
+				 EcorePackage.Literals.ECORE_CODE_GENERATOR_CONFIGURATION__BASE_PACKAGE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Description feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDescriptionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EcoreCodeGeneratorConfiguration_description_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EcoreCodeGeneratorConfiguration_description_feature", "_UI_EcoreCodeGeneratorConfiguration_type"),
+				 EcorePackage.Literals.ECORE_CODE_GENERATOR_CONFIGURATION__DESCRIPTION,
+				 true,
+				 true,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns EcoreCodeGeneratorConfiguration.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Configuration"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/EcoreCodeGeneratorConfiguration"));
 	}
 
 	/**
@@ -128,10 +174,10 @@ public class ConfigurationItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Configuration)object).getName();
+		String label = ((EcoreCodeGeneratorConfiguration)object).getTargetProject();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Configuration_type") :
-			getString("_UI_Configuration_type") + " " + label;
+			getString("_UI_EcoreCodeGeneratorConfiguration_type") :
+			getString("_UI_EcoreCodeGeneratorConfiguration_type") + " " + label;
 	}
 	
 
@@ -146,9 +192,11 @@ public class ConfigurationItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Configuration.class)) {
-			case EcorePackage.CONFIGURATION__ID:
-			case EcorePackage.CONFIGURATION__NAME:
+		switch (notification.getFeatureID(EcoreCodeGeneratorConfiguration.class)) {
+			case EcorePackage.ECORE_CODE_GENERATOR_CONFIGURATION__TARGET_PROJECT:
+			case EcorePackage.ECORE_CODE_GENERATOR_CONFIGURATION__SOURCE_FOLDER:
+			case EcorePackage.ECORE_CODE_GENERATOR_CONFIGURATION__BASE_PACKAGE:
+			case EcorePackage.ECORE_CODE_GENERATOR_CONFIGURATION__DESCRIPTION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

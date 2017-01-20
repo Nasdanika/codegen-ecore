@@ -10,9 +10,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.nasdanika.codegen.ecore.Attribute;
-import org.nasdanika.codegen.ecore.Configuration;
+import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EPackageSource;
 import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
+import org.nasdanika.codegen.ecore.EcoreCodeGeneratorConfiguration;
 import org.nasdanika.codegen.ecore.EcoreFactory;
 import org.nasdanika.codegen.ecore.EcorePackage;
 import org.nasdanika.codegen.ecore.Member;
@@ -100,7 +101,13 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass configurationEClass = null;
+	private EClass configurationEntryEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ecoreCodeGeneratorConfigurationEClass = null;
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
@@ -449,8 +456,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getConfiguration() {
-		return configurationEClass;
+	public EClass getConfigurationEntry() {
+		return configurationEntryEClass;
 	}
 
 	/**
@@ -458,8 +465,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getConfiguration_Id() {
-		return (EAttribute)configurationEClass.getEStructuralFeatures().get(0);
+	public EAttribute getConfigurationEntry_Id() {
+		return (EAttribute)configurationEntryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -467,8 +474,62 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getConfiguration_Name() {
-		return (EAttribute)configurationEClass.getEStructuralFeatures().get(1);
+	public EAttribute getConfigurationEntry_Name() {
+		return (EAttribute)configurationEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConfigurationEntry_Configuration() {
+		return (EReference)configurationEntryEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEcoreCodeGeneratorConfiguration() {
+		return ecoreCodeGeneratorConfigurationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEcoreCodeGeneratorConfiguration_TargetProject() {
+		return (EAttribute)ecoreCodeGeneratorConfigurationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEcoreCodeGeneratorConfiguration_SourceFolder() {
+		return (EAttribute)ecoreCodeGeneratorConfigurationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEcoreCodeGeneratorConfiguration_BasePackage() {
+		return (EAttribute)ecoreCodeGeneratorConfigurationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEcoreCodeGeneratorConfiguration_Description() {
+		return (EAttribute)ecoreCodeGeneratorConfigurationEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -541,9 +602,16 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 
 		memberEClass = createEClass(MEMBER);
 
-		configurationEClass = createEClass(CONFIGURATION);
-		createEAttribute(configurationEClass, CONFIGURATION__ID);
-		createEAttribute(configurationEClass, CONFIGURATION__NAME);
+		configurationEntryEClass = createEClass(CONFIGURATION_ENTRY);
+		createEAttribute(configurationEntryEClass, CONFIGURATION_ENTRY__ID);
+		createEAttribute(configurationEntryEClass, CONFIGURATION_ENTRY__NAME);
+		createEReference(configurationEntryEClass, CONFIGURATION_ENTRY__CONFIGURATION);
+
+		ecoreCodeGeneratorConfigurationEClass = createEClass(ECORE_CODE_GENERATOR_CONFIGURATION);
+		createEAttribute(ecoreCodeGeneratorConfigurationEClass, ECORE_CODE_GENERATOR_CONFIGURATION__TARGET_PROJECT);
+		createEAttribute(ecoreCodeGeneratorConfigurationEClass, ECORE_CODE_GENERATOR_CONFIGURATION__SOURCE_FOLDER);
+		createEAttribute(ecoreCodeGeneratorConfigurationEClass, ECORE_CODE_GENERATOR_CONFIGURATION__BASE_PACKAGE);
+		createEAttribute(ecoreCodeGeneratorConfigurationEClass, ECORE_CODE_GENERATOR_CONFIGURATION__DESCRIPTION);
 	}
 
 	/**
@@ -592,7 +660,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		initEAttribute(getModelElement_Selected(), theEcorePackage_1.getEBoolean(), "selected", null, 0, 1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelElement_Description(), theEcorePackage_1.getEString(), "description", null, 0, 1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelElement_Configuration(), this.getConfiguration(), null, "configuration", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelElement_Configuration(), this.getConfigurationEntry(), null, "configuration", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelElement_LastGenerationTargets(), theEcorePackage_1.getEString(), "lastGenerationTargets", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getModelElement__Find__EModelElement_boolean(), this.getModelElement(), "find", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -635,9 +703,16 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 
 		initEClass(memberEClass, Member.class, "Member", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(configurationEClass, Configuration.class, "Configuration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConfiguration_Id(), theEcorePackage_1.getEString(), "id", null, 0, 1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getConfiguration_Name(), theEcorePackage_1.getEString(), "name", null, 0, 1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(configurationEntryEClass, ConfigurationEntry.class, "ConfigurationEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConfigurationEntry_Id(), theEcorePackage_1.getEString(), "id", null, 0, 1, ConfigurationEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConfigurationEntry_Name(), theEcorePackage_1.getEString(), "name", null, 0, 1, ConfigurationEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConfigurationEntry_Configuration(), theEcorePackage_1.getEObject(), null, "configuration", null, 0, 1, ConfigurationEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(ecoreCodeGeneratorConfigurationEClass, EcoreCodeGeneratorConfiguration.class, "EcoreCodeGeneratorConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEcoreCodeGeneratorConfiguration_TargetProject(), theEcorePackage_1.getEString(), "targetProject", null, 0, 1, EcoreCodeGeneratorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEcoreCodeGeneratorConfiguration_SourceFolder(), theEcorePackage_1.getEString(), "sourceFolder", null, 0, 1, EcoreCodeGeneratorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEcoreCodeGeneratorConfiguration_BasePackage(), theEcorePackage_1.getEString(), "basePackage", null, 0, 1, EcoreCodeGeneratorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEcoreCodeGeneratorConfiguration_Description(), theEcorePackage_1.getEString(), "description", null, 0, 1, EcoreCodeGeneratorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -818,7 +893,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 			 "documentation", "Base class for class members."
 		   });	
 		addAnnotation
-		  (configurationEClass, 
+		  (configurationEntryEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "For each generator configuration a tab is displayed in the generator editor. Generation targets may share configurations."
