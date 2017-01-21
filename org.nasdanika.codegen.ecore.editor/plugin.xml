@@ -5,6 +5,8 @@
 -->
 
 <plugin>
+   <extension-point id="configuration_renderer" name="Configuration renderers contribution" schema="schema/configuration_renderer.exsd"/>
+   <extension-point id="generation_target" name="Generation target, e.g. &quot;Web UI&quot;" schema="schema/generation_target.exsd"/>
 
    <extension point="org.eclipse.ui.newWizards">
       <!-- @generated ecore-code-generation -->

@@ -13,8 +13,10 @@ import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -47,6 +49,7 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.net4j.util.concurrent.Sleeper;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.CTabFolder;
@@ -77,6 +80,7 @@ import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
 import org.nasdanika.codegen.ecore.EcoreFactory;
 import org.nasdanika.codegen.ecore.ModelElement;
+import org.nasdanika.codegen.ecore.provider.ecorecodegenerationEditPlugin;
 import org.nasdanika.codegen.presentation.JavaProjectClassLoader;
 import org.nasdanika.config.MutableContext;
 import org.nasdanika.config.SimpleMutableContext;
@@ -90,6 +94,7 @@ import org.pegdown.ast.RefLinkNode;
 import org.pegdown.ast.WikiLinkNode;
 
 public class EcoreCodegenForm extends Composite {
+	static final String GENERATION_TARGET_EXTENSION_POINT_ID = "org.nasdanika.codegen.ecore.editor.generation_target";
 	private static final Object[] NO_OBJECTS = {};
 	public static final int MARKDOWN_OPTIONS = 	Extensions.ALL ^ Extensions.HARDWRAPS ^ Extensions.SUPPRESS_HTML_BLOCKS ^ Extensions.SUPPRESS_ALL_HTML;
 	private static final String ECORE_DOC_ANNOTATION_SOURCE = "http://www.eclipse.org/emf/2002/GenModel";
@@ -143,68 +148,22 @@ public class EcoreCodegenForm extends Composite {
 		form.setLayout(new GridLayout(1, false));
 		form.getBody().setLayout(new GridLayout(2, false));
 		
-		try {
-			IProject project = ((FileEditorInput) editorInput).getFile().getProject();
-			if (project.isOpen() && project.getNature(JavaCore.NATURE_ID) != null) {
-				IJavaProject javaProject = JavaCore.create(project);
-			    ClassLoader currentProjectClassLoader = new JavaProjectClassLoader(getClass().getClassLoader(), javaProject);
-			
-				Action codeGenerationAction = new Action("Generate code", IAction.AS_PUSH_BUTTON) {
-					
-					@Override
-					public void run() {
-						try {						
-							EcoreCodeGenerator eCoreCodeGenerator = generatorWritableValue.getValue();
-//							CodeGenerationWizard codeGenerationWizard = new CodeGenerationWizard(
-//									eCoreCodeGenerator, 
-//									currentProjectClassLoader, 
-//									obj -> GeneratorUtil.isGenerate(eCoreCodeGenerator, obj) ? new BaseContextInfo<EObject>(eCoreCodeGenerator, obj) : null);
-//							
-//							WizardDialog dialog = new WizardDialog(EcoreCodegenForm.this.getShell(), codeGenerationWizard);
-//							if (dialog.open() == Window.OK) {
-//								try {
-//									new ProgressMonitorDialog(getShell()).run(true, true, codeGenerationWizard.getGenerateCodeOperation());
-//								} catch (CancellationException ce) {
-//									MessageDialog.openInformation(getShell(), "Operation cancelled", "Code generation cancelled by the user");			
-//								}
-//							}
-						} catch (Exception e) {
-							StackTraceElement[] stackTraces = Thread.currentThread().getStackTrace();
-							IStatus[] childStatuses = new IStatus[stackTraces.length];
-
-							for (int i = 0; i < stackTraces.length; ++i) {
-								childStatuses[i] = new Status(IStatus.ERROR, "org.nasdanika.codegen.ecore.editor", stackTraces[i].toString());
-							}
-
-							MultiStatus status = new MultiStatus(
-									"org.nasdanika.codegen.ecore.editor",
-									IStatus.ERROR, 
-									childStatuses,
-									e.toString(), 
-									e);
-							
-							e.printStackTrace();
-							ErrorDialog.openError(getShell(), "Error generating code", e.getMessage(), status);
-						}
-					}
-					
-				};
-				codeGenerationAction.setToolTipText("Opens code generation wizard");
-				codeGenerationAction.setImageDescriptor(ResourceManager.getPluginImageDescriptor("org.nasdanika.codegen.ecore.editor", "icons/full/obj16/cog.png"));
-				
-				form.getToolBarManager().add(codeGenerationAction);
-				form.getToolBarManager().update(true);
-			}
-		} catch (CoreException ce) {
-			// TODO Better reporting
-			ce.printStackTrace();
-		}
+		IProject project = ((FileEditorInput) editorInput).getFile().getProject();
+		
+		GenerateAction generateAction = new GenerateAction(project, adapterFactory);
+		generatorWritableValue.addChangeListener(event -> generateAction.setGenerator(generatorWritableValue.getValue()));
+		selectionWritableValue.addChangeListener(event -> generateAction.setSelection(selectionWritableValue.getValue()));
+		generateAction.setToolTipText("Generates code");
+		generateAction.setImageDescriptor(ResourceManager.getPluginImageDescriptor("org.nasdanika.codegen.ecore.editor", "icons/full/obj16/cog.png"));
+		
+		form.getToolBarManager().add(generateAction);
+		form.getToolBarManager().update(true);
 						
 		SashForm sections = new SashForm(form.getBody(), SWT.NONE);
 		sections.setLayout(new GridLayout(2, false));
 		sections.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		toolkit.paintBordersFor(sections);
-		sections.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+		sections.setBackground(getDisplay().getSystemColor(SWT.COLOR_GRAY));
 		
 		Section sctnDomainModel = toolkit.createSection(sections, Section.TWISTIE | Section.TITLE_BAR);
 		sctnDomainModel.setDescription("Domain model checkbox tree.");
@@ -377,7 +336,7 @@ public class EcoreCodegenForm extends Composite {
 		SashForm sashFormRight = new SashForm(sections, SWT.SMOOTH | SWT.VERTICAL);
 		toolkit.adapt(sashFormRight);
 		toolkit.paintBordersFor(sashFormRight);
-		sashFormRight.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+		sashFormRight.setBackground(getDisplay().getSystemColor(SWT.COLOR_GRAY));
 		
 		Section sctnElementInfo = toolkit.createSection(sashFormRight, Section.TWISTIE | Section.TITLE_BAR);
 		sctnElementInfo.setDescription("Domain model element details.");
@@ -549,30 +508,41 @@ public class EcoreCodegenForm extends Composite {
 	}
 	
 	private void renderConfiguration(EObject configuration, Composite parent) {
-		// TODO - EMF forms is default behavior, from extensions here.
 		try {
+			for (IConfigurationElement ce: Platform.getExtensionRegistry().getConfigurationElementsFor("org.nasdanika.codegen.ecore.editor.configuration_renderer")) {
+				// TODO renderers cache to improve performance?
+				if ("configuration_renderer".equals(ce.getName()) 
+						&& configuration.eClass().getName().equals(ce.getAttribute("configuration_eclass_name"))
+						&& configuration.eClass().getEPackage().getNsURI().equals(ce.getAttribute("configuration_epackage_ns_uri"))) {
+					((ConfigurationRenderer) ce.createExecutableExtension("renderer_class_name")).render(parent, configuration, editingDomain);
+					return;
+				}
+			}		
+		
 			ECPSWTViewRenderer.INSTANCE.render(parent, configuration);
-		} catch (ECPRendererException e) {
+		} catch (Exception e) {
 			Label lblNewLabel = new Label(parent, SWT.NONE);
 			toolkit.adapt(lblNewLabel, true, true);
-			lblNewLabel.setText("Error rendering form: "+e);			
+			lblNewLabel.setText("Error rendering form: "+e);
+			ecorecodegenerationEditorPlugin.INSTANCE.log(e);
 		}		
 	}
 	
 	private void updateConfiguration(ModelElement modelElement) {
-		// TODO - inspect current configuration entries and create new ones if needed.
-		if (modelElement instanceof EcoreCodeGenerator) {
-			for (ConfigurationEntry ce: modelElement.getConfiguration()) {
-				if ("general".equals(ce.getId())) {
-					return;
+		for (IConfigurationElement ce: Platform.getExtensionRegistry().getConfigurationElementsFor(GENERATION_TARGET_EXTENSION_POINT_ID)) {
+			// TODO targets cache to improve performance?
+			if ("generation_target".equals(ce.getName())) {
+				String qualifiedID = ce.getContributor().getName()+"/"+ce.getAttribute("id");
+				if (generatorWritableValue.getValue().getGenerationTargets().contains(qualifiedID)) {
+					try {
+						((GenerationTarget) ce.createExecutableExtension("class")).updateConfiguration(modelElement);
+					} catch (CoreException e) {
+						ecorecodegenerationEditPlugin.INSTANCE.log(e);
+						e.printStackTrace();
+					}
 				}
 			}
-			ConfigurationEntry general = EcoreFactory.eINSTANCE.createConfigurationEntry();
-			general.setId("general");
-			general.setName("General");
-			general.setConfiguration(EcoreFactory.eINSTANCE.createEcoreCodeGeneratorConfiguration());
-			modelElement.getConfiguration().add(general);
-		}
+		}		
 	}
 	
 	protected DataBindingContext initDataBindings() {
@@ -586,4 +556,5 @@ public class EcoreCodegenForm extends Composite {
 		//
 		return bindingContext;
 	}
+		
 }
