@@ -104,7 +104,7 @@ public class PackageImpl extends ModelElementImpl implements org.nasdanika.codeg
 			return cls == null ? null : cls.find(eModelElement, create);			
 		}
 		
-		throw new IllegalArgumentException("Not EClass, EStructuralFeature, or EOperation: "+eModelElement);
+		return null;
 	}
 
 } //PackageImpl

@@ -4,6 +4,7 @@ package org.nasdanika.codegen.ecore.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -215,6 +216,24 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 */
 	public EOperation getEcoreCodeGenerator__GetEPackages() {
 		return ecoreCodeGeneratorEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getEcoreCodeGenerator__IsSelected__EModelElement() {
+		return ecoreCodeGeneratorEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getEcoreCodeGenerator__GetConfiguration__EModelElement() {
+		return ecoreCodeGeneratorEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -573,6 +592,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		createEReference(ecoreCodeGeneratorEClass, ECORE_CODE_GENERATOR__PACKAGES);
 		createEAttribute(ecoreCodeGeneratorEClass, ECORE_CODE_GENERATOR__GENERATION_TARGETS);
 		createEOperation(ecoreCodeGeneratorEClass, ECORE_CODE_GENERATOR___GET_EPACKAGES);
+		createEOperation(ecoreCodeGeneratorEClass, ECORE_CODE_GENERATOR___IS_SELECTED__EMODELELEMENT);
+		createEOperation(ecoreCodeGeneratorEClass, ECORE_CODE_GENERATOR___GET_CONFIGURATION__EMODELELEMENT);
 
 		ePackageSourceEClass = createEClass(EPACKAGE_SOURCE);
 		createEAttribute(ePackageSourceEClass, EPACKAGE_SOURCE__LOCATION);
@@ -674,9 +695,21 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 
 		initEOperation(getEcoreCodeGenerator__GetEPackages(), theEcorePackage_1.getEPackage(), "getEPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		op = initEOperation(getEcoreCodeGenerator__IsSelected__EModelElement(), theEcorePackage_1.getEBoolean(), "isSelected", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage_1.getEModelElement(), "eModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getEcoreCodeGenerator__GetConfiguration__EModelElement(), null, "getConfiguration", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage_1.getEModelElement(), "eModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(theEcorePackage_1.getEMap());
+		EGenericType g2 = createEGenericType(theEcorePackage_1.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(theEcorePackage_1.getEObject());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
 		initEClass(ePackageSourceEClass, EPackageSource.class, "EPackageSource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEPackageSource_Location(), theEcorePackage_1.getEString(), "location", null, 0, 1, EPackageSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEPackageSource_NsURIs(), ecorePackage.getEString(), "NsURIs", null, 1, -1, EPackageSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEPackageSource_NsURIs(), ecorePackage.getEString(), "NsURIs", null, 0, -1, EPackageSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getEPackageSource__GetEPackages(), theEcorePackage_1.getEPackage(), "getEPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -795,6 +828,18 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Returns a list of EPackage\'s referenced by the model."
+		   });	
+		addAnnotation
+		  (getEcoreCodeGenerator__IsSelected__EModelElement(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Returns true if given EModelElement or one of its containers or children or EcoreCodeGenrator is selected.\r\nIn essence, this method returns true if a given element shall participate in code generation, perhaps not fully (some of its children)."
+		   });	
+		addAnnotation
+		  (getEcoreCodeGenerator__GetConfiguration__EModelElement(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Returns configuration for a given EModelElement. Empty collection if element\r\nis selected by there is no configuration. ``null`` if not selected.\r\n\r\nReturn value is a Map with configuration ID\'s as keys and configuration EObject\'s as values."
 		   });	
 		addAnnotation
 		  (getEcoreCodeGenerator_PackageSources(), 

@@ -1,6 +1,8 @@
 package org.nasdanika.codegen.ecore.presentation;
 
+import org.eclipse.emf.ecore.EObject;
 import org.nasdanika.codegen.Work;
+import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
 import org.nasdanika.codegen.ecore.ModelElement;
 
 public interface GenerationTarget {
@@ -18,6 +20,6 @@ public interface GenerationTarget {
 	 * @return
 	 * @throws Exception
 	 */
-	Work<?> createWork(Object obj) throws Exception;
+	Work<?> createWork(EcoreCodeGenerator generator, EObject selection) throws Exception;
 
 }

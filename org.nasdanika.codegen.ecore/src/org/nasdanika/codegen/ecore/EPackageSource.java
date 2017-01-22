@@ -67,7 +67,7 @@ public interface EPackageSource extends CDOObject {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Ns UR Is</em>' attribute list.
 	 * @see org.nasdanika.codegen.ecore.EcorePackage#getEPackageSource_NsURIs()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	EList<String> getNsURIs();

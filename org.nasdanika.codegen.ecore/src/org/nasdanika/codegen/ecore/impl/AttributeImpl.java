@@ -41,7 +41,7 @@ public class AttributeImpl extends ModelElementImpl implements Attribute {
 	 * @generated NOT
 	 */
 	public ModelElement find(EModelElement eModelElement, boolean create) {
-		throw new UnsupportedOperationException("find() shall not be invoked on leaf model elements");
+		return null;
 	}
 
 } //AttributeImpl

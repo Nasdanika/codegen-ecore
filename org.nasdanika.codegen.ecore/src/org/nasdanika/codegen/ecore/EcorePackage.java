@@ -249,13 +249,31 @@ public interface EcorePackage extends EPackage {
 	int ECORE_CODE_GENERATOR___GET_EPACKAGES = MODEL_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Is Selected</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_CODE_GENERATOR___IS_SELECTED__EMODELELEMENT = MODEL_ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Configuration</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_CODE_GENERATOR___GET_CONFIGURATION__EMODELELEMENT = MODEL_ELEMENT_OPERATION_COUNT + 2;
+
+	/**
 	 * The number of operations of the '<em>Code Generator</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ECORE_CODE_GENERATOR_OPERATION_COUNT = MODEL_ELEMENT_OPERATION_COUNT + 1;
+	int ECORE_CODE_GENERATOR_OPERATION_COUNT = MODEL_ELEMENT_OPERATION_COUNT + 3;
 
 
 	/**
@@ -1205,6 +1223,26 @@ public interface EcorePackage extends EPackage {
 	EOperation getEcoreCodeGenerator__GetEPackages();
 
 	/**
+	 * Returns the meta object for the '{@link org.nasdanika.codegen.ecore.EcoreCodeGenerator#isSelected(org.eclipse.emf.ecore.EModelElement) <em>Is Selected</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Selected</em>' operation.
+	 * @see org.nasdanika.codegen.ecore.EcoreCodeGenerator#isSelected(org.eclipse.emf.ecore.EModelElement)
+	 * @generated
+	 */
+	EOperation getEcoreCodeGenerator__IsSelected__EModelElement();
+
+	/**
+	 * Returns the meta object for the '{@link org.nasdanika.codegen.ecore.EcoreCodeGenerator#getConfiguration(org.eclipse.emf.ecore.EModelElement) <em>Get Configuration</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Configuration</em>' operation.
+	 * @see org.nasdanika.codegen.ecore.EcoreCodeGenerator#getConfiguration(org.eclipse.emf.ecore.EModelElement)
+	 * @generated
+	 */
+	EOperation getEcoreCodeGenerator__GetConfiguration__EModelElement();
+
+	/**
 	 * Returns the meta object for class '{@link org.nasdanika.codegen.ecore.EPackageSource <em>EPackage Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1635,6 +1673,20 @@ public interface EcorePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation ECORE_CODE_GENERATOR___GET_EPACKAGES = eINSTANCE.getEcoreCodeGenerator__GetEPackages();
+		/**
+		 * The meta object literal for the '<em><b>Is Selected</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ECORE_CODE_GENERATOR___IS_SELECTED__EMODELELEMENT = eINSTANCE.getEcoreCodeGenerator__IsSelected__EModelElement();
+		/**
+		 * The meta object literal for the '<em><b>Get Configuration</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ECORE_CODE_GENERATOR___GET_CONFIGURATION__EMODELELEMENT = eINSTANCE.getEcoreCodeGenerator__GetConfiguration__EModelElement();
 		/**
 		 * The meta object literal for the '{@link org.nasdanika.codegen.ecore.impl.EPackageSourceImpl <em>EPackage Source</em>}' class.
 		 * <!-- begin-user-doc -->

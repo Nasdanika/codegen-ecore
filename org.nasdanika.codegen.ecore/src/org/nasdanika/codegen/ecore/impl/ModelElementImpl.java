@@ -140,17 +140,6 @@ public abstract class ModelElementImpl extends CDOObjectImpl implements ModelEle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelElement find(EModelElement eModelElement, boolean create) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {

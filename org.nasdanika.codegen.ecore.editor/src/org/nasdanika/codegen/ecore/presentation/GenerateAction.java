@@ -20,8 +20,10 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -45,7 +47,7 @@ import org.nasdanika.codegen.Work;
 import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
 import org.nasdanika.codegen.ecore.provider.ecorecodegenerationEditPlugin;
 import org.nasdanika.codegen.presentation.CodegenEditorPlugin;
-import org.nasdanika.codegen.presentation.JavaProjectClassLoader;
+import org.nasdanika.codegen.util.JavaProjectClassLoader;
 import org.nasdanika.config.Configuration;
 import org.nasdanika.config.Context;
 
@@ -78,36 +80,31 @@ class GenerateAction extends Action implements GeneratorLabelProvider {
 			IWorkbench workbench = PlatformUI.getWorkbench();
 			Shell shell = workbench.getModalDialogShellProvider().getShell();
 						
-// TODO - Validation. Implement in the model first.			
-//			Diagnostician diagnostician = new Diagnostician() {
-//				
-//				@Override
-//				public String getObjectLabel(EObject eObject) {
-//					String ret = eObject instanceof Generator ? GenerateAction.this.getLabel((Generator<?>) eObject) : null;
-//					return ret == null ? super.getObjectLabel(eObject) : ret;
-//				}
-//
-//				protected boolean doValidate(EValidator eValidator, EClass eClass, EObject eObject,	DiagnosticChain diagnostics, Map<Object, Object> context) {
-//					if (eObject instanceof Generator && ((Generator<?>) eObject).isFilterable() && !generatorFilter.test((Generator<?>) eObject)) {
-//						return true; // Ignoring generators which will not be invoked.
-//					}
-//					
-//					return super.doValidate(eValidator, eClass, eObject, diagnostics, context);
-//				}
-//				
-//			}; 
-//			
-//			BasicDiagnostic accumulator = new BasicDiagnostic();
-//			for (Generator<Object> rootGenerator: rootGenerators) {
-//				accumulator.add(diagnostician.validate(rootGenerator));
-//			}
-//			
-//			IStatus validationStatus = BasicDiagnostic.toIStatus(accumulator);
-//			if (validationStatus.getSeverity() == IStatus.ERROR) {
-//	            ErrorDialog.openError(shell, "Generation model is invalid", "Generation model contains errors", validationStatus);
-//				CodegenEditorPlugin.getPlugin().getLog().log(validationStatus);
-//				return;
-//			}
+			Diagnostician diagnostician = new Diagnostician() {
+				
+				@Override
+				public String getObjectLabel(EObject eObject) {
+					if (eObject != null && adapterFactory != null && !eObject.eIsProxy()) {
+						IItemLabelProvider itemLabelProvider = (IItemLabelProvider) adapterFactory.adapt(eObject, IItemLabelProvider.class);
+						if (itemLabelProvider != null) {
+							return itemLabelProvider.getText(eObject);
+						}
+					}
+					
+					return super.getObjectLabel(eObject);
+				}
+				
+			}; 
+			
+			BasicDiagnostic accumulator = new BasicDiagnostic();
+			accumulator.add(diagnostician.validate(selection));
+			
+			IStatus validationStatus = BasicDiagnostic.toIStatus(accumulator);
+			if (validationStatus.getSeverity() == IStatus.ERROR) {
+	            ErrorDialog.openError(shell, "Generation model is invalid", "Generation model contains errors", validationStatus);
+				CodegenEditorPlugin.getPlugin().getLog().log(validationStatus);
+				return;
+			}
 			
 			try {							
 				URI resourceURI = selection.eResource().getURI();
@@ -157,6 +154,7 @@ class GenerateAction extends Action implements GeneratorLabelProvider {
 				};
 				
 				properties.put(ReconcileAction.OVERWRITE_PREDICATE_CONTEXT_PROPERTY_NAME, overwritePredicate);
+				properties.put("selection", selection);
 				
 				// TODO - models and selections as properties plus custom properties.
 				
@@ -182,6 +180,10 @@ class GenerateAction extends Action implements GeneratorLabelProvider {
 					@Override
 					public <T> T get(Class<T> type) {
 						
+						if (EcoreCodeGenerator.class.equals(type)) {
+							return (T) generator;
+						}
+						
 						if (GeneratorLabelProvider.class.equals(type)) {
 							return (T) GenerateAction.this;
 						}
@@ -194,7 +196,7 @@ class GenerateAction extends Action implements GeneratorLabelProvider {
 						return classLoader[0];
 					}
 					
-				};
+				};				
 				
 				WorkspaceModifyOperation operation = new WorkspaceModifyOperation() {
 					
@@ -210,7 +212,7 @@ class GenerateAction extends Action implements GeneratorLabelProvider {
 									String qualifiedID = ce.getContributor().getName()+"/"+ce.getAttribute("id");
 									if (generator.getGenerationTargets().contains(qualifiedID)) {
 										try {
-											Work<?> work = ((GenerationTarget) ce.createExecutableExtension("class")).createWork(selection);
+											Work<?> work = ((GenerationTarget) ce.createExecutableExtension("class")).createWork(generator, selection);
 											totalWork += work.size();
 											allWork.add(new Work<Object>() {
 

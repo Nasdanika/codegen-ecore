@@ -27,6 +27,12 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecore-code-generation.ecore#//EcoreCodeGenerator/packages"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//EcoreCodeGenerator/generationTargets"/>
       <genOperations ecoreOperation="ecore-code-generation.ecore#//EcoreCodeGenerator/getEPackages"/>
+      <genOperations ecoreOperation="ecore-code-generation.ecore#//EcoreCodeGenerator/isSelected">
+        <genParameters ecoreParameter="ecore-code-generation.ecore#//EcoreCodeGenerator/isSelected/eModelElement"/>
+      </genOperations>
+      <genOperations ecoreOperation="ecore-code-generation.ecore#//EcoreCodeGenerator/getConfiguration">
+        <genParameters ecoreParameter="ecore-code-generation.ecore#//EcoreCodeGenerator/getConfiguration/eModelElement"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="ecore-code-generation.ecore#//EPackageSource">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//EPackageSource/location"/>

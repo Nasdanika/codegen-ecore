@@ -3,14 +3,17 @@
 package org.nasdanika.codegen.ecore.impl;
 
 import java.lang.reflect.InvocationTargetException;
-
+import java.util.HashMap;
+import java.util.Map;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EPackageSource;
 import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
 import org.nasdanika.codegen.ecore.EcoreFactory;
@@ -100,6 +103,61 @@ public class EcoreCodeGeneratorImpl extends ModelElementImpl implements EcoreCod
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public boolean isSelected(EModelElement eModelElement) {
+		if (isSelected()) {
+			return true;
+		}
+		ModelElement me = find(eModelElement, false);
+		if (me != null && me.isSelected()) {
+			return true;
+		}
+		
+		TreeIterator<EObject> cit = eModelElement.eAllContents();
+		while (cit.hasNext()) {
+			EObject next = cit.next();
+			if (next instanceof EModelElement) {
+				me = find((EModelElement) next, false);
+				if (me != null && me.isSelected()) {
+					return true;
+				}
+			}
+		}
+		
+		for (EObject container = eModelElement.eContainer(); container instanceof EModelElement; container = container.eContainer()) {
+			me = find((EModelElement) container, false);
+			if (me != null && me.isSelected()) {
+				return true;
+			}			
+		}
+		
+		return false;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Map<String, EObject> getConfiguration(EModelElement eModelElement) {
+		if (isSelected(eModelElement)) {
+			Map<String, EObject> ret = new HashMap<>();
+			ModelElement me = find(eModelElement, false);
+			if (me != null) {
+				for (ConfigurationEntry ce: me.getConfiguration()) {
+					ret.put(ce.getId(), ce.getConfiguration());
+				}
+			}
+			return ret;
+		}
+		
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public ModelElement find(EModelElement eModelElement, boolean create) {
 		if (eModelElement instanceof EPackage) {			
 			for (org.nasdanika.codegen.ecore.Package pkg: getPackages()) {
@@ -137,6 +195,10 @@ public class EcoreCodeGeneratorImpl extends ModelElementImpl implements EcoreCod
 		switch (operationID) {
 			case EcorePackage.ECORE_CODE_GENERATOR___GET_EPACKAGES:
 				return getEPackages();
+			case EcorePackage.ECORE_CODE_GENERATOR___IS_SELECTED__EMODELELEMENT:
+				return isSelected((EModelElement)arguments.get(0));
+			case EcorePackage.ECORE_CODE_GENERATOR___GET_CONFIGURATION__EMODELELEMENT:
+				return getConfiguration((EModelElement)arguments.get(0));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

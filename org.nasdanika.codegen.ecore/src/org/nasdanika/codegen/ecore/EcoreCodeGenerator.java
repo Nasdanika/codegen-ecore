@@ -2,7 +2,10 @@
  */
 package org.nasdanika.codegen.ecore;
 
+import java.util.Map;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 /**
@@ -84,4 +87,30 @@ public interface EcoreCodeGenerator extends ModelElement {
 	 * @generated
 	 */
 	EList<EPackage> getEPackages();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns true if given EModelElement or one of its containers or children or EcoreCodeGenrator is selected.
+	 * In essence, this method returns true if a given element shall participate in code generation, perhaps not fully (some of its children).
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean isSelected(EModelElement eModelElement);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns configuration for a given EModelElement. Empty collection if element
+	 * is selected by there is no configuration. ``null`` if not selected.
+	 * 
+	 * Return value is a Map with configuration ID's as keys and configuration EObject's as values.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	Map<String, EObject> getConfiguration(EModelElement eModelElement);
 } // EcoreCodeGenerator

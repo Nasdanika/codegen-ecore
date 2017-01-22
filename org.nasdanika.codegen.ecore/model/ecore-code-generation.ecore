@@ -57,6 +57,22 @@
         <details key="documentation" value="Returns a list of EPackage's referenced by the model."/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="isSelected" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns true if given EModelElement or one of its containers or children or EcoreCodeGenrator is selected.&#xD;&#xA;In essence, this method returns true if a given element shall participate in code generation, perhaps not fully (some of its children)."/>
+      </eAnnotations>
+      <eParameters name="eModelElement" eType="ecore:EClass ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EModelElement"/>
+    </eOperations>
+    <eOperations name="getConfiguration">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns configuration for a given EModelElement. Empty collection if element&#xD;&#xA;is selected by there is no configuration. ``null`` if not selected.&#xD;&#xA;&#xD;&#xA;Return value is a Map with configuration ID's as keys and configuration EObject's as values."/>
+      </eAnnotations>
+      <eGenericType eClassifier="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EMap">
+        <eTypeArguments eClassifier="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+        <eTypeArguments eClassifier="ecore:EClass ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+      </eGenericType>
+      <eParameters name="eModelElement" eType="ecore:EClass ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EModelElement"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packageSources" upperBound="-1"
         eType="#//EPackageSource" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -90,8 +106,8 @@
         <details key="documentation" value="URL of the source ECore model. If null or empty then the global registry is used as package source.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="NsURIs" lowerBound="1"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="NsURIs" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="NsURIs of EPackages to load."/>
       </eAnnotations>

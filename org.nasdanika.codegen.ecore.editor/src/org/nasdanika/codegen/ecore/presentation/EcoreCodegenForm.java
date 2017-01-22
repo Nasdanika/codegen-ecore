@@ -14,10 +14,7 @@ import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
@@ -29,33 +26,25 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecp.ui.view.ECPRendererException;
 import org.eclipse.emf.ecp.ui.view.swt.ECPSWTViewRenderer;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.databinding.viewers.ViewerProperties;
-import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.net4j.util.concurrent.Sleeper;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.layout.FillLayout;
@@ -75,13 +64,11 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.wb.swt.ResourceManager;
-import org.eclipse.wb.swt.SWTResourceManager;
 import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
 import org.nasdanika.codegen.ecore.EcoreFactory;
 import org.nasdanika.codegen.ecore.ModelElement;
 import org.nasdanika.codegen.ecore.provider.ecorecodegenerationEditPlugin;
-import org.nasdanika.codegen.presentation.JavaProjectClassLoader;
 import org.nasdanika.config.MutableContext;
 import org.nasdanika.config.SimpleMutableContext;
 import org.pegdown.Extensions;
@@ -119,7 +106,6 @@ public class EcoreCodegenForm extends Composite {
 	 * @param site 
 	 * @param new AdapterFactoryContentProvider(adapterFactory) 
 	 */
-	@SuppressWarnings({ "unchecked", "serial" })
 	public EcoreCodegenForm(
 			Composite parent, 
 			int style, 

@@ -141,7 +141,7 @@ public class ClassImpl extends ModelElementImpl implements org.nasdanika.codegen
 			return op == null ? null : op.getParameters().get(eOp.getEParameters().indexOf(eModelElement));
 		}
 		
-		throw new IllegalArgumentException("Neither EStructuralFeature nor EOperation or EParameter: "+eModelElement);
+		return null;
 	}
 
 } //ClassImpl

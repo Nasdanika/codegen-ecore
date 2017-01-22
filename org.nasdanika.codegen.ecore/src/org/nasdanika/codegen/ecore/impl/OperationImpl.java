@@ -59,7 +59,7 @@ public class OperationImpl extends ModelElementImpl implements Operation {
 	 * @generated NOT
 	 */
 	public ModelElement find(EModelElement eModelElement, boolean create) {
-		throw new UnsupportedOperationException("find() shall not be invoked on Operation");
+		return null;
 	}
 
 } //OperationImpl
