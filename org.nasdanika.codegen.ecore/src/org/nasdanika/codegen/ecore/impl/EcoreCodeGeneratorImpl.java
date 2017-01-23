@@ -158,6 +158,20 @@ public class EcoreCodeGeneratorImpl extends ModelElementImpl implements EcoreCod
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public EObject getConfiguration(String id) {
+		for (ConfigurationEntry ce: getConfiguration()) {
+			if (ce.getId().equals(id)) {
+				return ce.getConfiguration();
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public ModelElement find(EModelElement eModelElement, boolean create) {
 		if (eModelElement instanceof EPackage) {			
 			for (org.nasdanika.codegen.ecore.Package pkg: getPackages()) {
@@ -199,6 +213,8 @@ public class EcoreCodeGeneratorImpl extends ModelElementImpl implements EcoreCod
 				return isSelected((EModelElement)arguments.get(0));
 			case EcorePackage.ECORE_CODE_GENERATOR___GET_CONFIGURATION__EMODELELEMENT:
 				return getConfiguration((EModelElement)arguments.get(0));
+			case EcorePackage.ECORE_CODE_GENERATOR___GET_CONFIGURATION__STRING:
+				return getConfiguration((String)arguments.get(0));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

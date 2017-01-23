@@ -33,6 +33,9 @@
       <genOperations ecoreOperation="ecore-code-generation.ecore#//EcoreCodeGenerator/getConfiguration">
         <genParameters ecoreParameter="ecore-code-generation.ecore#//EcoreCodeGenerator/getConfiguration/eModelElement"/>
       </genOperations>
+      <genOperations ecoreOperation="ecore-code-generation.ecore#//EcoreCodeGenerator/getConfiguration.1">
+        <genParameters ecoreParameter="ecore-code-generation.ecore#//EcoreCodeGenerator/getConfiguration.1/id"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="ecore-code-generation.ecore#//EPackageSource">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//EPackageSource/location"/>

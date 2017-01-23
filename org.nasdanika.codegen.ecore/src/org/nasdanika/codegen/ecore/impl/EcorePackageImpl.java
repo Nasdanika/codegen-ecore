@@ -241,6 +241,15 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getEcoreCodeGenerator__GetConfiguration__String() {
+		return ecoreCodeGeneratorEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEPackageSource() {
 		return ePackageSourceEClass;
 	}
@@ -594,6 +603,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		createEOperation(ecoreCodeGeneratorEClass, ECORE_CODE_GENERATOR___GET_EPACKAGES);
 		createEOperation(ecoreCodeGeneratorEClass, ECORE_CODE_GENERATOR___IS_SELECTED__EMODELELEMENT);
 		createEOperation(ecoreCodeGeneratorEClass, ECORE_CODE_GENERATOR___GET_CONFIGURATION__EMODELELEMENT);
+		createEOperation(ecoreCodeGeneratorEClass, ECORE_CODE_GENERATOR___GET_CONFIGURATION__STRING);
 
 		ePackageSourceEClass = createEClass(EPACKAGE_SOURCE);
 		createEAttribute(ePackageSourceEClass, EPACKAGE_SOURCE__LOCATION);
@@ -706,6 +716,9 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		g2 = createEGenericType(theEcorePackage_1.getEObject());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
+
+		op = initEOperation(getEcoreCodeGenerator__GetConfiguration__String(), theEcorePackage_1.getEObject(), "getConfiguration", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage_1.getEString(), "id", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(ePackageSourceEClass, EPackageSource.class, "EPackageSource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEPackageSource_Location(), theEcorePackage_1.getEString(), "location", null, 0, 1, EPackageSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -840,6 +853,12 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Returns configuration for a given EModelElement. Empty collection if element\r\nis selected by there is no configuration. ``null`` if not selected.\r\n\r\nReturn value is a Map with configuration ID\'s as keys and configuration EObject\'s as values."
+		   });	
+		addAnnotation
+		  (getEcoreCodeGenerator__GetConfiguration__String(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Returns this generator configuration for a given key."
 		   });	
 		addAnnotation
 		  (getEcoreCodeGenerator_PackageSources(), 

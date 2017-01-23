@@ -113,4 +113,15 @@ public interface EcoreCodeGenerator extends ModelElement {
 	 * @generated
 	 */
 	Map<String, EObject> getConfiguration(EModelElement eModelElement);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns this generator configuration for a given key.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	EObject getConfiguration(String id);
 } // EcoreCodeGenerator
