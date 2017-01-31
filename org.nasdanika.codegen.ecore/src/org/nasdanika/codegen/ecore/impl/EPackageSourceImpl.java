@@ -4,11 +4,14 @@ package org.nasdanika.codegen.ecore.impl;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -16,7 +19,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.internal.cdo.CDOObjectImpl;
-
 import org.nasdanika.codegen.ecore.EPackageSource;
 import org.nasdanika.codegen.ecore.EcorePackage;
 
@@ -116,8 +118,22 @@ public class EPackageSourceImpl extends CDOObjectImpl implements EPackageSource 
 			TreeIterator<EObject> cit = resource.getAllContents();
 			while (cit.hasNext()) {
 				EObject next = cit.next();
-				if (next instanceof EPackage && (getNsURIs().isEmpty() || getNsURIs().contains(((EPackage) next).getNsURI()))) {
-					ret.add((EPackage) next);
+				if (next instanceof EPackage) {
+					if ((getNsURIs().isEmpty() || getNsURIs().contains(((EPackage) next).getNsURI()))) {
+						ret.add((EPackage) next);
+					}
+				} else if (next instanceof GenPackage) {
+					GenPackage genPackage = (GenPackage) next;
+					EPackage ePackage = genPackage.getEcorePackage();	
+					if ((getNsURIs().isEmpty() || getNsURIs().contains(ePackage.getNsURI()))) {
+						ret.add(ePackage);
+						for (GenClassifier gc: genPackage.getGenClassifiers()) {
+							EClassifier ec = gc.getEcoreClassifier();
+							if (ec.getInstanceClassName() == null) {
+								ec.setInstanceClassName(gc.getRawInstanceClassName());
+							}
+						}
+					}
 				}
 			}
 		}

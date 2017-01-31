@@ -12,5 +12,6 @@ Export-Package: org.nasdanika.codegen.ecore,
  org.nasdanika.codegen.ecore.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.emf.cdo;visibility:=reexport
+ org.eclipse.emf.cdo;visibility:=reexport,
+ org.eclipse.emf.codegen.ecore
 Bundle-ActivationPolicy: lazy
