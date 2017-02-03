@@ -5,18 +5,16 @@ package org.nasdanika.codegen.ecore.impl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EPackageSource;
@@ -52,6 +50,7 @@ public class EcoreCodeGeneratorImpl extends ModelElementImpl implements EcoreCod
 	protected EcoreCodeGeneratorImpl() {
 		super();
 		resourceSet = new ResourceSetImpl();
+		resourceSet.setURIResourceMap(new HashMap<>());
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 
 	}
@@ -207,7 +206,12 @@ public class EcoreCodeGeneratorImpl extends ModelElementImpl implements EcoreCod
 			}			
 		}
 		
-		// TODO - sometimes proxies are not resolved. 
+		/*
+		 * Sometimes proxies are not resolved if models referencing each other using relative platform URI's are loaded using file URI's and they 
+		 * reside in different directories. E.g. model B in bundle org.b references model A in bundle org.a using ../org.a/A.ecore#//... 
+		 * It all works fine if org.a and org.b reside in the same directory. If not, you may create symbolic links or use different URI's
+		 * or install models into Eclipse so they can be loaded from the global registry using just namespace URI's. 
+		 */
 		return null;
 	}
 
