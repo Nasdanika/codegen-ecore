@@ -7,6 +7,7 @@ import org.eclipse.emf.cdo.CDOObject;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -77,10 +78,11 @@ public interface EPackageSource extends CDOObject {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Returns a list of referenced EPackage's.
+	 * @param resourceSet Resource set to load models to.
 	 * <!-- end-model-doc -->
-	 * @model kind="operation"
+	 * @model
 	 * @generated
 	 */
-	EList<EPackage> getEPackages();
+	EList<EPackage> getEPackages(ResourceSet resourceSet);
 
 } // EPackageSource

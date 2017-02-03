@@ -277,7 +277,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getEPackageSource__GetEPackages() {
+	public EOperation getEPackageSource__GetEPackages__ResourceSet() {
 		return ePackageSourceEClass.getEOperations().get(0);
 	}
 
@@ -608,7 +608,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		ePackageSourceEClass = createEClass(EPACKAGE_SOURCE);
 		createEAttribute(ePackageSourceEClass, EPACKAGE_SOURCE__LOCATION);
 		createEAttribute(ePackageSourceEClass, EPACKAGE_SOURCE__NS_UR_IS);
-		createEOperation(ePackageSourceEClass, EPACKAGE_SOURCE___GET_EPACKAGES);
+		createEOperation(ePackageSourceEClass, EPACKAGE_SOURCE___GET_EPACKAGES__RESOURCESET);
 
 		packageEClass = createEClass(PACKAGE);
 		createEAttribute(packageEClass, PACKAGE__NS_URI);
@@ -724,7 +724,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		initEAttribute(getEPackageSource_Location(), theEcorePackage_1.getEString(), "location", null, 0, 1, EPackageSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEPackageSource_NsURIs(), ecorePackage.getEString(), "NsURIs", null, 0, -1, EPackageSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getEPackageSource__GetEPackages(), theEcorePackage_1.getEPackage(), "getEPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getEPackageSource__GetEPackages__ResourceSet(), theEcorePackage_1.getEPackage(), "getEPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage_1.getEResourceSet(), "resourceSet", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(packageEClass, org.nasdanika.codegen.ecore.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPackage_NsURI(), theEcorePackage_1.getEString(), "nsURI", null, 0, 1, org.nasdanika.codegen.ecore.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -885,10 +886,16 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 			 "documentation", "EPackage source defines where to load EPackages from and which packages to load (NsURI\'s)."
 		   });	
 		addAnnotation
-		  (getEPackageSource__GetEPackages(), 
+		  (getEPackageSource__GetEPackages__ResourceSet(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Returns a list of referenced EPackage\'s."
+		   });	
+		addAnnotation
+		  ((getEPackageSource__GetEPackages__ResourceSet()).getEParameters().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Resource set to load models to."
 		   });	
 		addAnnotation
 		  (getEPackageSource_Location(), 

@@ -13,6 +13,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EPackageSource;
 import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
@@ -36,6 +41,9 @@ import org.nasdanika.codegen.ecore.ModelElement;
  * @generated
  */
 public class EcoreCodeGeneratorImpl extends ModelElementImpl implements EcoreCodeGenerator {
+	
+	private ResourceSetImpl resourceSet;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -43,6 +51,9 @@ public class EcoreCodeGeneratorImpl extends ModelElementImpl implements EcoreCod
 	 */
 	protected EcoreCodeGeneratorImpl() {
 		super();
+		resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+
 	}
 
 	/**
@@ -93,7 +104,7 @@ public class EcoreCodeGeneratorImpl extends ModelElementImpl implements EcoreCod
 	public EList<EPackage> getEPackages() {
 		EList<EPackage> ret = ECollections.newBasicEList();
 		for (EPackageSource ps: getPackageSources()) {
-			ret.addAll(ps.getEPackages());
+			ret.addAll(ps.getEPackages(resourceSet));
 		}		
 		return ret;
 	}
@@ -196,7 +207,8 @@ public class EcoreCodeGeneratorImpl extends ModelElementImpl implements EcoreCod
 			}			
 		}
 		
-		throw new IllegalArgumentException("Not EPackage, EClass, EStructuralFeature, EOperation, or EParameter: "+eModelElement);
+		// TODO - sometimes proxies are not resolved. 
+		return null;
 	}
 
 	/**

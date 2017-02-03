@@ -329,7 +329,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EPACKAGE_SOURCE___GET_EPACKAGES = 0;
+	int EPACKAGE_SOURCE___GET_EPACKAGES__RESOURCESET = 0;
 
 	/**
 	 * The number of operations of the '<em>EPackage Source</em>' class.
@@ -1294,14 +1294,14 @@ public interface EcorePackage extends EPackage {
 	EAttribute getEPackageSource_NsURIs();
 
 	/**
-	 * Returns the meta object for the '{@link org.nasdanika.codegen.ecore.EPackageSource#getEPackages() <em>Get EPackages</em>}' operation.
+	 * Returns the meta object for the '{@link org.nasdanika.codegen.ecore.EPackageSource#getEPackages(org.eclipse.emf.ecore.resource.ResourceSet) <em>Get EPackages</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the '<em>Get EPackages</em>' operation.
-	 * @see org.nasdanika.codegen.ecore.EPackageSource#getEPackages()
+	 * @see org.nasdanika.codegen.ecore.EPackageSource#getEPackages(org.eclipse.emf.ecore.resource.ResourceSet)
 	 * @generated
 	 */
-	EOperation getEPackageSource__GetEPackages();
+	EOperation getEPackageSource__GetEPackages__ResourceSet();
 
 	/**
 	 * Returns the meta object for class '{@link org.nasdanika.codegen.ecore.ModelElement <em>Model Element</em>}'.
@@ -1742,7 +1742,7 @@ public interface EcorePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation EPACKAGE_SOURCE___GET_EPACKAGES = eINSTANCE.getEPackageSource__GetEPackages();
+		EOperation EPACKAGE_SOURCE___GET_EPACKAGES__RESOURCESET = eINSTANCE.getEPackageSource__GetEPackages__ResourceSet();
 		/**
 		 * The meta object literal for the '{@link org.nasdanika.codegen.ecore.impl.ModelElementImpl <em>Model Element</em>}' class.
 		 * <!-- begin-user-doc -->

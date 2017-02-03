@@ -16,8 +16,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.internal.cdo.CDOObjectImpl;
 import org.nasdanika.codegen.ecore.EPackageSource;
 import org.nasdanika.codegen.ecore.EcorePackage;
@@ -99,7 +97,7 @@ public class EPackageSourceImpl extends CDOObjectImpl implements EPackageSource 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EList<EPackage> getEPackages() {
+	public EList<EPackage> getEPackages(ResourceSet resourceSet) {
 		EList<EPackage> ret = ECollections.newBasicEList();
 		
 		if (getLocation() == null || getLocation().trim().length() == 0) {
@@ -111,8 +109,6 @@ public class EPackageSourceImpl extends CDOObjectImpl implements EPackageSource 
 				}
 			}			
 		} else {		
-			ResourceSet resourceSet = new ResourceSetImpl();
-			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 			URI uri = URI.createURI(getLocation());
 			Resource resource = resourceSet.getResource(uri, true);
 			TreeIterator<EObject> cit = resource.getAllContents();
@@ -149,8 +145,8 @@ public class EPackageSourceImpl extends CDOObjectImpl implements EPackageSource 
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case EcorePackage.EPACKAGE_SOURCE___GET_EPACKAGES:
-				return getEPackages();
+			case EcorePackage.EPACKAGE_SOURCE___GET_EPACKAGES__RESOURCESET:
+				return getEPackages((ResourceSet)arguments.get(0));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

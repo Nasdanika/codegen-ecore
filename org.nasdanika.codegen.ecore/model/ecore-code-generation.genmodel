@@ -40,7 +40,9 @@
     <genClasses ecoreClass="ecore-code-generation.ecore#//EPackageSource">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//EPackageSource/location"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//EPackageSource/NsURIs"/>
-      <genOperations ecoreOperation="ecore-code-generation.ecore#//EPackageSource/getEPackages"/>
+      <genOperations ecoreOperation="ecore-code-generation.ecore#//EPackageSource/getEPackages">
+        <genParameters ecoreParameter="ecore-code-generation.ecore#//EPackageSource/getEPackages/resourceSet"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="ecore-code-generation.ecore#//Package">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore-code-generation.ecore#//Package/nsURI"/>
