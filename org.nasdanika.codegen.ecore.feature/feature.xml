@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.nasdanika.codegen.ecore.feature"
-      label="ECore Code Generation feature"
+      label="ECore Code Generation Model and Editor"
       version="0.1.0.qualifier">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description url="https://github.com/Nasdanika/codegen-ecore">
+      Model and editor for selecting a sub-set of Ecore model elements and then generating code for selected targets. 
+For example, selecting a sub-set of classes and features participating in a particular user story and then generating Web UI which implements CRUD operations and can be used as the basis for the selected user story UI.
    </description>
 
-   <copyright url="http://www.example.com/copyright">
+   <copyright>
       [Enter Copyright Description here.]
    </copyright>
 

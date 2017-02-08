@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
    <feature url="features/org.nasdanika.codegen.ecore.feature_0.1.0.qualifier.jar" id="org.nasdanika.codegen.ecore.feature" version="0.1.0.qualifier">
-      <category name="org.nasdanika.toos"/>
+      <category name="org.nasdanika.tools"/>
    </feature>
-   <category-def name="org.nasdanika.toos" label="Nasdanika tools">
+   <category-def name="org.nasdanika.tools" label="Tools">
       <description>
          Eclipse IDE plug-ins.
       </description>
