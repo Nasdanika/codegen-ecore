@@ -46,7 +46,6 @@ import org.nasdanika.codegen.ReconcileAction;
 import org.nasdanika.codegen.Work;
 import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
 import org.nasdanika.codegen.ecore.provider.ecorecodegenerationEditPlugin;
-import org.nasdanika.codegen.presentation.CodegenEditorPlugin;
 import org.nasdanika.codegen.util.JavaProjectClassLoader;
 import org.nasdanika.config.Configuration;
 import org.nasdanika.config.Context;
@@ -102,7 +101,7 @@ class GenerateAction extends Action implements GeneratorLabelProvider {
 			IStatus validationStatus = BasicDiagnostic.toIStatus(accumulator);
 			if (validationStatus.getSeverity() == IStatus.ERROR) {
 	            ErrorDialog.openError(shell, "Generation model is invalid", "Generation model contains errors", validationStatus);
-				CodegenEditorPlugin.getPlugin().getLog().log(validationStatus);
+	            ecorecodegenerationEditorPlugin.getPlugin().getLog().log(validationStatus);
 				return;
 			}
 			
@@ -259,7 +258,7 @@ class GenerateAction extends Action implements GeneratorLabelProvider {
 			} catch (Exception exception) {
 	            MultiStatus status = createMultiStatus(exception.toString(), exception);
 	            ErrorDialog.openError(shell, "Generation error", exception.toString(), status);
-				CodegenEditorPlugin.getPlugin().getLog().log(status);
+	            ecorecodegenerationEditorPlugin.getPlugin().getLog().log(status);
 				exception.printStackTrace();
 			}
 		}

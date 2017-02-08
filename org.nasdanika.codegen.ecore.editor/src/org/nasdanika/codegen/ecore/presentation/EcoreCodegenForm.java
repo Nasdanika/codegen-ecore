@@ -71,6 +71,7 @@ import org.nasdanika.codegen.ecore.ModelElement;
 import org.nasdanika.codegen.ecore.provider.ecorecodegenerationEditPlugin;
 import org.nasdanika.config.MutableContext;
 import org.nasdanika.config.SimpleMutableContext;
+import org.nasdanika.presentation.EObjectRenderer;
 import org.pegdown.Extensions;
 import org.pegdown.LinkRenderer;
 import org.pegdown.PegDownProcessor;
@@ -495,15 +496,15 @@ public class EcoreCodegenForm extends Composite {
 	
 	private void renderConfiguration(EObject configuration, Composite parent) {
 		try {
-			for (IConfigurationElement ce: Platform.getExtensionRegistry().getConfigurationElementsFor("org.nasdanika.codegen.ecore.editor.configuration_renderer")) {
+			for (IConfigurationElement ce: Platform.getExtensionRegistry().getConfigurationElementsFor("org.nasdanika.presentation.eobject_renderer")) {
 				// TODO renderers cache to improve performance?
-				if ("configuration_renderer".equals(ce.getName()) 
-						&& configuration.eClass().getName().equals(ce.getAttribute("configuration_eclass_name"))
-						&& configuration.eClass().getEPackage().getNsURI().equals(ce.getAttribute("configuration_epackage_ns_uri"))) {
-					((ConfigurationRenderer) ce.createExecutableExtension("renderer_class_name")).render(parent, configuration, editingDomain);
+				if ("eobject_renderer".equals(ce.getName()) 
+						&& configuration.eClass().getName().equals(ce.getAttribute("eclass_name"))
+						&& configuration.eClass().getEPackage().getNsURI().equals(ce.getAttribute("epackage_ns_uri"))) {
+					((EObjectRenderer) ce.createExecutableExtension("renderer_class_name")).render(parent, configuration, editingDomain);
 					return;
 				}
-			}		
+			}					
 		
 			ECPSWTViewRenderer.INSTANCE.render(parent, configuration);
 		} catch (Exception e) {
