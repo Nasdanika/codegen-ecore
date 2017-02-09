@@ -353,6 +353,9 @@ public class EcoreCodegenForm extends Composite {
 					
 		selectionWritableValue.addChangeListener(new IChangeListener() {
 			
+			private EObject currentSelection;
+			private boolean currentChecked;
+			
 			@Override
 			public void handleChange(ChangeEvent event) {
 				EObject selection = selectionWritableValue.getValue();
@@ -395,8 +398,14 @@ public class EcoreCodegenForm extends Composite {
 						browser.setText("Error");
 					}
 				}	
-				renderConfiguration(checkboxTreeViewer.getChecked(selection) ? selection : null);
-				
+								
+				// Render only if the selected object has actually changed.
+				boolean selectionChecked = checkboxTreeViewer.getChecked(selection);
+				if (selectionChecked != currentChecked || selection != currentSelection) {
+					currentChecked = selectionChecked;
+					currentSelection = selection;
+					renderConfiguration(selectionChecked ? selection : null);
+				}
 			}
 			
 		});
