@@ -92,6 +92,7 @@ public class EcoreCodegenForm extends Composite {
 	private final FormToolkit toolkit = new FormToolkit(Display.getCurrent());
 	
 	private WritableValue<EcoreCodeGenerator> generatorWritableValue = new WritableValue<EcoreCodeGenerator>(EcoreFactory.eINSTANCE.createEcoreCodeGenerator(), EcoreCodeGenerator.class);
+	private List<GenerationTarget> generationTargets = new ArrayList<>();
 	private Text txtDomainModelFilter;
 	
 	private WritableValue<String> filterValue = new WritableValue<>();
@@ -139,6 +140,24 @@ public class EcoreCodegenForm extends Composite {
 		
 		GenerateAction generateAction = new GenerateAction(project, adapterFactory);
 		generatorWritableValue.addChangeListener(event -> generateAction.setGenerator(generatorWritableValue.getValue()));
+		generatorWritableValue.addChangeListener(event -> {
+			generationTargets.clear();
+			for (IConfigurationElement ce: Platform.getExtensionRegistry().getConfigurationElementsFor(GENERATION_TARGET_EXTENSION_POINT_ID)) {
+				// TODO targets cache to improve performance?
+				if ("generation_target".equals(ce.getName())) {
+					String qualifiedID = ce.getContributor().getName()+"/"+ce.getAttribute("id");
+					if (generatorWritableValue.getValue().getGenerationTargets().contains(qualifiedID)) {
+						try {
+							generationTargets.add(((GenerationTarget) ce.createExecutableExtension("class")));
+						} catch (CoreException e) {
+							ecorecodegenerationEditPlugin.INSTANCE.log(e);
+							e.printStackTrace();
+						}
+					}
+				}
+			}		
+			
+		});
 		selectionWritableValue.addChangeListener(event -> generateAction.setSelection(selectionWritableValue.getValue()));
 		generateAction.setToolTipText("Generates code");
 		generateAction.setImageDescriptor(ResourceManager.getPluginImageDescriptor("org.nasdanika.codegen.ecore.editor", "icons/full/obj16/cog.png"));
@@ -185,7 +204,7 @@ public class EcoreCodegenForm extends Composite {
 				}
 				
 				if (object instanceof EcoreCodeGenerator) {
-					return ((EcoreCodeGenerator) object).getEPackages().toArray();
+					return ((EcoreCodeGenerator) object).getEPackages().stream().filter(ep -> isSupportedByGenerationTargets(ep)).toArray();
 				}
 				
 				if (object instanceof EStructuralFeature || object instanceof EParameter) {
@@ -193,16 +212,16 @@ public class EcoreCodegenForm extends Composite {
 				}
 				
 				if (object instanceof EOperation) {
-					return ((EOperation) object).getEParameters().toArray();
+					return ((EOperation) object).getEParameters().stream().filter(ep -> isSupportedByGenerationTargets(ep)).toArray();
 				}							
 				
 				Object[] ret = super.getChildren(object);
 				if (object instanceof EClass) {
-					return Arrays.stream(ret).filter(obj -> obj instanceof EStructuralFeature || obj instanceof EOperation).toArray();  
+					return Arrays.stream(ret).filter(obj -> (obj instanceof EStructuralFeature || obj instanceof EOperation) && isSupportedByGenerationTargets((EModelElement) obj)).toArray();  
 				}
 				
 				if (object instanceof EPackage) {
-					return Arrays.stream(ret).filter(obj -> obj instanceof EClass).toArray();  
+					return Arrays.stream(ret).filter(obj -> obj instanceof EClass && isSupportedByGenerationTargets((EModelElement) obj)).toArray();  
 				}
 
 				return ret;
@@ -257,7 +276,7 @@ public class EcoreCodegenForm extends Composite {
 		checkboxTreeViewer.addFilter(new ViewerFilter() {
 			
 			@Override
-			public boolean select(Viewer viewer, Object parentElement, Object element) {
+			public boolean select(Viewer viewer, Object parentElement, Object element) {				
 				if (filterValue.getValue() == null || filterValue.getValue().trim().length() == 0) {
 					return true;
 				}
@@ -502,6 +521,16 @@ public class EcoreCodegenForm extends Composite {
 		
 		configurationComposite.layout();		
 	}
+
+	private boolean isSupportedByGenerationTargets(EModelElement modelElement) {
+		for (GenerationTarget generationTarget: generationTargets) {
+			if (generationTarget.isSupported(modelElement)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	private void renderConfiguration(EObject configuration, Composite parent) {
 		try {
@@ -525,20 +554,9 @@ public class EcoreCodegenForm extends Composite {
 	}
 	
 	private void updateConfiguration(ModelElement modelElement) {
-		for (IConfigurationElement ce: Platform.getExtensionRegistry().getConfigurationElementsFor(GENERATION_TARGET_EXTENSION_POINT_ID)) {
-			// TODO targets cache to improve performance?
-			if ("generation_target".equals(ce.getName())) {
-				String qualifiedID = ce.getContributor().getName()+"/"+ce.getAttribute("id");
-				if (generatorWritableValue.getValue().getGenerationTargets().contains(qualifiedID)) {
-					try {
-						((GenerationTarget) ce.createExecutableExtension("class")).updateConfiguration(modelElement);
-					} catch (CoreException e) {
-						ecorecodegenerationEditPlugin.INSTANCE.log(e);
-						e.printStackTrace();
-					}
-				}
-			}
-		}		
+		for (GenerationTarget generationTarget: generationTargets) {
+			generationTarget.updateConfiguration(modelElement);
+		}
 	}
 	
 	protected DataBindingContext initDataBindings() {
