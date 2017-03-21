@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="org.nasdanika.codegen.ecore.target" sequenceNumber="7">
+<?pde version="3.8"?><target name="org.nasdanika.codegen.ecore.target" sequenceNumber="9">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.nasdanika.third-party.feature.feature.group" version="0.1.0.201702050629"/>
+<unit id="org.nasdanika.third-party.feature.feature.group" version="0.1.0.201702272031"/>
 <repository location="http://www.nasdanika.org/third-party/org.nasdanika.third-party.repository/target/repository"/>
 </location>
 <location path="${eclipse_home}" type="Profile"/>
@@ -13,7 +13,7 @@
 <repository location="http://www.nasdanika.org/maven-osgi"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.nasdanika.presentation.feature.feature.group" version="0.1.0.201702080015"/>
+<unit id="org.nasdanika.presentation.feature.feature.group" version="0.1.0.201702092009"/>
 <repository location="http://www.nasdanika.org/products/presentation/repository"/>
 </location>
 </locations>
