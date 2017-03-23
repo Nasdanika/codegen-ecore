@@ -108,8 +108,11 @@ public class EPackageSourceImpl extends CDOObjectImpl implements EPackageSource 
 					ret.add(ep);
 				}
 			}			
-		} else {		
+		} else {
 			URI uri = URI.createURI(getLocation());
+			if (eResource() != null && eResource().getURI() != null) {
+				uri = uri.resolve(eResource().getURI());
+			}
 			Resource resource = resourceSet.getResource(uri, true);
 			TreeIterator<EObject> cit = resource.getAllContents();
 			while (cit.hasNext()) {
