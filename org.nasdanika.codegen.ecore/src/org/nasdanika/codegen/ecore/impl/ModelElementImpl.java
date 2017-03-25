@@ -9,6 +9,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.internal.cdo.CDOObjectImpl;
 import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EcorePackage;
@@ -140,11 +141,40 @@ public abstract class ModelElementImpl extends CDOObjectImpl implements ModelEle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ModelElement find(EModelElement eModelElement, boolean create) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EObject getConfiguration(String id) {
+		if (id != null) {
+			for (ConfigurationEntry cfg: getConfiguration()) {
+				if (id.equals(cfg.getId())) {
+					return cfg.getConfiguration();
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
 			case EcorePackage.MODEL_ELEMENT___FIND__EMODELELEMENT_BOOLEAN:
 				return find((EModelElement)arguments.get(0), (Boolean)arguments.get(1));
+			case EcorePackage.MODEL_ELEMENT___GET_CONFIGURATION__STRING:
+				return getConfiguration((String)arguments.get(0));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

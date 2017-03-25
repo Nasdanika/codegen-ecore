@@ -349,6 +349,15 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getModelElement__GetConfiguration__String() {
+		return modelElementEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPackage() {
 		return packageEClass;
 	}
@@ -595,6 +604,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		createEReference(modelElementEClass, MODEL_ELEMENT__CONFIGURATION);
 		createEAttribute(modelElementEClass, MODEL_ELEMENT__LAST_GENERATION_TARGETS);
 		createEOperation(modelElementEClass, MODEL_ELEMENT___FIND__EMODELELEMENT_BOOLEAN);
+		createEOperation(modelElementEClass, MODEL_ELEMENT___GET_CONFIGURATION__STRING);
 
 		ecoreCodeGeneratorEClass = createEClass(ECORE_CODE_GENERATOR);
 		createEReference(ecoreCodeGeneratorEClass, ECORE_CODE_GENERATOR__PACKAGE_SOURCES);
@@ -697,6 +707,9 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		EOperation op = initEOperation(getModelElement__Find__EModelElement_boolean(), this.getModelElement(), "find", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage_1.getEModelElement(), "eModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage_1.getEBoolean(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getModelElement__GetConfiguration__String(), theEcorePackage_1.getEObject(), "getConfiguration", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage_1.getEString(), "id", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(ecoreCodeGeneratorEClass, EcoreCodeGenerator.class, "EcoreCodeGenerator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEcoreCodeGenerator_PackageSources(), this.getEPackageSource(), null, "packageSources", null, 0, -1, EcoreCodeGenerator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

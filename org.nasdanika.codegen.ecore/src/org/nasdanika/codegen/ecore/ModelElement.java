@@ -7,6 +7,7 @@ import org.eclipse.emf.cdo.CDOObject;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -152,5 +153,13 @@ public interface ModelElement extends CDOObject {
 	 * @generated
 	 */
 	ModelElement find(EModelElement eModelElement, boolean create);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EObject getConfiguration(String id);
 
 } // ModelElement

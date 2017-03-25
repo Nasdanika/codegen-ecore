@@ -131,13 +131,22 @@ public interface EcorePackage extends EPackage {
 	int MODEL_ELEMENT___FIND__EMODELELEMENT_BOOLEAN = 0;
 
 	/**
+	 * The operation id for the '<em>Get Configuration</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT___GET_CONFIGURATION__STRING = 1;
+
+	/**
 	 * The number of operations of the '<em>Model Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_ELEMENT_OPERATION_COUNT = 1;
+	int MODEL_ELEMENT_OPERATION_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.nasdanika.codegen.ecore.impl.EcoreCodeGeneratorImpl <em>Code Generator</em>}' class.
@@ -432,6 +441,15 @@ public interface EcorePackage extends EPackage {
 	int PACKAGE___FIND__EMODELELEMENT_BOOLEAN = MODEL_ELEMENT___FIND__EMODELELEMENT_BOOLEAN;
 
 	/**
+	 * The operation id for the '<em>Get Configuration</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE___GET_CONFIGURATION__STRING = MODEL_ELEMENT___GET_CONFIGURATION__STRING;
+
+	/**
 	 * The number of operations of the '<em>Package</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -523,6 +541,15 @@ public interface EcorePackage extends EPackage {
 	int CLASS___FIND__EMODELELEMENT_BOOLEAN = MODEL_ELEMENT___FIND__EMODELELEMENT_BOOLEAN;
 
 	/**
+	 * The operation id for the '<em>Get Configuration</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS___GET_CONFIGURATION__STRING = MODEL_ELEMENT___GET_CONFIGURATION__STRING;
+
+	/**
 	 * The number of operations of the '<em>Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -603,6 +630,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int MEMBER___FIND__EMODELELEMENT_BOOLEAN = MODEL_ELEMENT___FIND__EMODELELEMENT_BOOLEAN;
+
+	/**
+	 * The operation id for the '<em>Get Configuration</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER___GET_CONFIGURATION__STRING = MODEL_ELEMENT___GET_CONFIGURATION__STRING;
 
 	/**
 	 * The number of operations of the '<em>Member</em>' class.
@@ -687,6 +723,15 @@ public interface EcorePackage extends EPackage {
 	int STRUCTURAL_FEATURE___FIND__EMODELELEMENT_BOOLEAN = MEMBER___FIND__EMODELELEMENT_BOOLEAN;
 
 	/**
+	 * The operation id for the '<em>Get Configuration</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURAL_FEATURE___GET_CONFIGURATION__STRING = MEMBER___GET_CONFIGURATION__STRING;
+
+	/**
 	 * The number of operations of the '<em>Structural Feature</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -769,6 +814,15 @@ public interface EcorePackage extends EPackage {
 	int ATTRIBUTE___FIND__EMODELELEMENT_BOOLEAN = STRUCTURAL_FEATURE___FIND__EMODELELEMENT_BOOLEAN;
 
 	/**
+	 * The operation id for the '<em>Get Configuration</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE___GET_CONFIGURATION__STRING = STRUCTURAL_FEATURE___GET_CONFIGURATION__STRING;
+
+	/**
 	 * The number of operations of the '<em>Attribute</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -849,6 +903,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCE___FIND__EMODELELEMENT_BOOLEAN = STRUCTURAL_FEATURE___FIND__EMODELELEMENT_BOOLEAN;
+
+	/**
+	 * The operation id for the '<em>Get Configuration</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE___GET_CONFIGURATION__STRING = STRUCTURAL_FEATURE___GET_CONFIGURATION__STRING;
 
 	/**
 	 * The number of operations of the '<em>Reference</em>' class.
@@ -940,6 +1003,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION___FIND__EMODELELEMENT_BOOLEAN = MEMBER___FIND__EMODELELEMENT_BOOLEAN;
+
+	/**
+	 * The operation id for the '<em>Get Configuration</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION___GET_CONFIGURATION__STRING = MEMBER___GET_CONFIGURATION__STRING;
 
 	/**
 	 * The number of operations of the '<em>Operation</em>' class.
@@ -1049,6 +1121,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAMETER___FIND__EMODELELEMENT_BOOLEAN = MODEL_ELEMENT___FIND__EMODELELEMENT_BOOLEAN;
+
+	/**
+	 * The operation id for the '<em>Get Configuration</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER___GET_CONFIGURATION__STRING = MODEL_ELEMENT___GET_CONFIGURATION__STRING;
 
 	/**
 	 * The number of operations of the '<em>Parameter</em>' class.
@@ -1377,6 +1458,16 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getModelElement__Find__EModelElement_boolean();
+
+	/**
+	 * Returns the meta object for the '{@link org.nasdanika.codegen.ecore.ModelElement#getConfiguration(java.lang.String) <em>Get Configuration</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Configuration</em>' operation.
+	 * @see org.nasdanika.codegen.ecore.ModelElement#getConfiguration(java.lang.String)
+	 * @generated
+	 */
+	EOperation getModelElement__GetConfiguration__String();
 
 	/**
 	 * Returns the meta object for class '{@link org.nasdanika.codegen.ecore.Package <em>Package</em>}'.
@@ -1794,6 +1885,13 @@ public interface EcorePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation MODEL_ELEMENT___FIND__EMODELELEMENT_BOOLEAN = eINSTANCE.getModelElement__Find__EModelElement_boolean();
+		/**
+		 * The meta object literal for the '<em><b>Get Configuration</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MODEL_ELEMENT___GET_CONFIGURATION__STRING = eINSTANCE.getModelElement__GetConfiguration__String();
 		/**
 		 * The meta object literal for the '{@link org.nasdanika.codegen.ecore.impl.PackageImpl <em>Package</em>}' class.
 		 * <!-- begin-user-doc -->

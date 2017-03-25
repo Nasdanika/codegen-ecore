@@ -45,14 +45,13 @@ public class EcoreCodeGeneratorImpl extends ModelElementImpl implements EcoreCod
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected EcoreCodeGeneratorImpl() {
 		super();
 		resourceSet = new ResourceSetImpl();
 		resourceSet.setURIResourceMap(new HashMap<>());
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-
 	}
 
 	/**
@@ -229,8 +228,6 @@ public class EcoreCodeGeneratorImpl extends ModelElementImpl implements EcoreCod
 				return isSelected((EModelElement)arguments.get(0));
 			case EcorePackage.ECORE_CODE_GENERATOR___GET_CONFIGURATION__EMODELELEMENT:
 				return getConfiguration((EModelElement)arguments.get(0));
-			case EcorePackage.ECORE_CODE_GENERATOR___GET_CONFIGURATION__STRING:
-				return getConfiguration((String)arguments.get(0));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

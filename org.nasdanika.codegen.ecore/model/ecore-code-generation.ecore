@@ -20,6 +20,9 @@
         </eAnnotations>
       </eParameters>
     </eOperations>
+    <eOperations name="getConfiguration" eType="ecore:EClass ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EObject">
+      <eParameters name="id" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="selected" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Indicates whether this element is supported by the ecore generator model. True indicates that this element and all its children are part of the model. "/>

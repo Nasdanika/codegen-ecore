@@ -21,6 +21,9 @@
         <genParameters ecoreParameter="ecore-code-generation.ecore#//ModelElement/find/eModelElement"/>
         <genParameters ecoreParameter="ecore-code-generation.ecore#//ModelElement/find/create"/>
       </genOperations>
+      <genOperations ecoreOperation="ecore-code-generation.ecore#//ModelElement/getConfiguration">
+        <genParameters ecoreParameter="ecore-code-generation.ecore#//ModelElement/getConfiguration/id"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="ecore-code-generation.ecore#//EcoreCodeGenerator">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecore-code-generation.ecore#//EcoreCodeGenerator/packageSources"/>
