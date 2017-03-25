@@ -429,6 +429,7 @@ public class EcoreCodegenForm extends Composite {
 			
 		});
 		
+		sashFormRight.setWeights(new int[] {1, 2});
 		sections.setWeights(new int[] {1, 2});
 		m_bindingContext = initDataBindings();
 	}
