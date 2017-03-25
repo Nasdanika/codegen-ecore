@@ -129,7 +129,7 @@ public class EcoreCodegenForm extends Composite {
 		setLayout(new FillLayout(SWT.HORIZONTAL));
 		
 		Form form = toolkit.createForm(this);
-		form.setText("Generators Model");
+		form.setText("Generator Model");
 		Composite body = form.getBody();
 		toolkit.decorateFormHeading(form);
 		toolkit.paintBordersFor(body);
