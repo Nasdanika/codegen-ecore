@@ -39,6 +39,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ISetSelectionTarget;
+import org.nasdanika.codegen.ecore.EPackageSource;
 import org.nasdanika.codegen.ecore.EcoreCodeGenerator;
 import org.nasdanika.codegen.ecore.EcoreFactory;
 import org.nasdanika.codegen.ecore.EcorePackage;
@@ -125,6 +126,8 @@ public class EcoreModelWizard extends Wizard implements INewWizard {
 	 */
 	protected List<String> initialObjectNames;
 
+	private GenerationTargetsSelectionPage generationTargetsSelectionPage;
+
 	/**
 	 * This just records the information.
 	 * <!-- begin-user-doc -->
@@ -146,7 +149,20 @@ public class EcoreModelWizard extends Wizard implements INewWizard {
 	 */
 	protected EObject createInitialModel() {
 		EcoreCodeGenerator root = EcoreFactory.eINSTANCE.createEcoreCodeGenerator();
-		root.getPackageSources().addAll(ePackagesSelectionPage.getPackageSources());
+		IFile modelFile = newFileCreationPage.getModelFile();
+		URI modelFileURI = URI.createPlatformResourceURI(modelFile.getProject().getName()+"/"+modelFile.getProjectRelativePath().toString(), true);
+		String mfn = modelFile.getName();
+		int dotIdx = mfn.lastIndexOf('.');
+		root.setName(dotIdx == -1 ? mfn : mfn.substring(0, dotIdx));
+		for (String uriStr: ePackagesSelectionPage.getResourceURIs()) {
+			URI resURI = URI.createURI(uriStr).deresolve(modelFileURI);
+			EPackageSource ePackageSource = EcoreFactory.eINSTANCE.createEPackageSource();
+			ePackageSource.setLocation(resURI.toString());
+			root.getPackageSources().add(ePackageSource);
+		}
+		for (String gt: generationTargetsSelectionPage.getGenerationTargets()) {
+			root.getGenerationTargets().add(gt);
+		}
 		return root;
 	}
 
@@ -339,8 +355,13 @@ public class EcoreModelWizard extends Wizard implements INewWizard {
 		}
 		ePackagesSelectionPage = new EPackagesSelectionPage("ePackagesSelectionPage");
 		ePackagesSelectionPage.setTitle(ecorecodegenerationEditorPlugin.INSTANCE.getString("_UI_EcoreModelWizard_label"));
-		ePackagesSelectionPage.setDescription(ecorecodegenerationEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
+		ePackagesSelectionPage.setDescription("Select packages");
 		addPage(ePackagesSelectionPage);
+		
+		generationTargetsSelectionPage = new GenerationTargetsSelectionPage("generationTargetsSelectionPage");
+		generationTargetsSelectionPage.setTitle(ecorecodegenerationEditorPlugin.INSTANCE.getString("_UI_EcoreModelWizard_label"));
+		generationTargetsSelectionPage.setDescription("Select generation targets");
+		addPage(generationTargetsSelectionPage);
 	}
 
 	/**

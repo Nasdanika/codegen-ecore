@@ -155,8 +155,7 @@ public class EcoreCodegenForm extends Composite {
 						}
 					}
 				}
-			}		
-			
+			}					
 		});
 		selectionWritableValue.addChangeListener(event -> generateAction.setSelection(selectionWritableValue.getValue()));
 		generateAction.setToolTipText("Generates code");

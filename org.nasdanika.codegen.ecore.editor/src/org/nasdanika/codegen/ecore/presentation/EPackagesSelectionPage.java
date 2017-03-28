@@ -1,33 +1,33 @@
 package org.nasdanika.codegen.ecore.presentation;
 
-import java.util.Collections;
-import java.util.List;
-
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.presentation.EcoreActionBarContributor.ExtendedLoadResourceAction.ExtendedLoadResourceDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.nasdanika.codegen.ecore.EPackageSource;
 
 /**
  * EPackages selection page
  */
 // Some code was borrowed from the empty emf wizard page.
 public class EPackagesSelectionPage extends WizardPage {
-
 	
-	public List<EPackageSource> getPackageSources() {
-		/*
-		 * https://git.eclipse.org/c/emfclient/org.eclipse.emf.ecp.core.git/tree/bundles/org.eclipse.emfforms.editor/src/org/eclipse/emfforms/internal/editor/toolbaractions/LoadEcoreAction.java?id=88ba6b3b2548ba150f4e634dc02b0f15ec1306dd 
-		 * ExtendedLoadResourceDialog
-		 * org.eclipse.emf.edit.ui.action.LoadResourceAction; LoadResourceDialog;
-		 */
-		return Collections.emptyList();
+	private org.eclipse.swt.widgets.List list;
+	
+	public String[] getResourceURIs() {
+		return list.getItems();
 	}
 	
 	/**
 	 * 
 	 * @param pageName Page name.
+	 * @param newFileCreationPage 
 	 */
 	public EPackagesSelectionPage(String pageName) {
 		super(pageName);
@@ -42,9 +42,51 @@ public class EPackagesSelectionPage extends WizardPage {
 
 		setControl(composite);		
 		composite.setLayout(new GridLayout(2, false));
+		
+		list = new org.eclipse.swt.widgets.List(composite, SWT.NONE); 
+		list.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		
+		Button btnAddPackage = new Button(composite, SWT.NONE);
+		btnAddPackage.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
+		btnAddPackage.setText("Add");
+		
+		Button btnRemove = new Button(composite, SWT.NONE);
+		btnRemove.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		btnRemove.setEnabled(false);
+		btnRemove.setText("Remove");
+		btnRemove.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				list.remove(list.getSelectionIndices());
+				setPageComplete(list.getItemCount() > 0);
+			}
+		});
 
-		// TODO - create controls - list of selected packages, Add/Remove buttons.
+		list.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				btnRemove.setEnabled(list.getSelectionCount() > 0);
+			}
+		});
+		btnAddPackage.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {				
+				ExtendedLoadResourceDialog resourceDialog = new ExtendedLoadResourceDialog(composite.getShell(), null);
+				if (resourceDialog.open() == Window.OK) {
+					for (URI uri: resourceDialog.getURIs()) {
+						list.add(uri.toString());						
+					}
+					setPageComplete(list.getItemCount() > 0);
+					if (list.getSelectionCount() == 0 && list.getItemCount() > 0) {
+						list.select(0);
+						btnRemove.setEnabled(true);
+					}
+				}
+			}
+		});
+
+		setPageComplete(list.getItemCount() > 0);
 		
 	}
-								
+									
 }
