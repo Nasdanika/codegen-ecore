@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Code Generation" link_to="../org.nasdanika.codegen.editor/toc.xml#code_generation">
+   <topic href="doc/ecore.html" label="Ecore">
+      <topic href="doc/generation_targets.html" label="Generation Targets">
+         <anchor id="generation_targets"/>
+      </topic>
+   </topic>
+</toc>
