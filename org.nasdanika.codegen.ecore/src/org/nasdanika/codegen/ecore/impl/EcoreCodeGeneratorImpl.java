@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.nasdanika.codegen.ecore.ConfigurationEntry;
 import org.nasdanika.codegen.ecore.EPackageSource;
@@ -114,7 +115,8 @@ public class EcoreCodeGeneratorImpl extends ModelElementImpl implements EcoreCod
 	 */
 	public boolean isSelected(EModelElement eModelElement) {
 		if (isSelected()) {
-			return true;
+			// Selected if contained in one of packages
+			return EcoreUtil.isAncestor(getEPackages(), eModelElement);
 		}
 		ModelElement me = find(eModelElement, false);
 		if (me != null && me.isSelected()) {
