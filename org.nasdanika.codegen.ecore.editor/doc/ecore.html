@@ -5,5 +5,101 @@
 	</head>
 	<body>
 		<h1 id="ecore-code-generation">Ecore Code Generation</h1>
+		<p>Those working with Eclipse EMF Ecore models are familiar with the Ecore code generation editors and process:</p>
+		<ul>
+			<li>The Ecore model contains the model definition - packages, classifiers, structural features, operations, etc.</li>
+			<li>The generator model contains additional information required for code generation - java package names, names of base classes, ...</li>
+			<li>There are four "generation targets"</li>
+			<li>Model</li>
+			<li>Edit support</li>
+			<li>Editor</li>
+			<li>Tests</li>
+		</ul>
+		<p>Nasdanika Ecore Code Generation extends the code generation concepts in the following ways:</p>
+		<ul>
+			<li>Allows users to select a sub-set of model elements for which to generate code.</li>
+			<li>Generation targets can be contributed to the UI through the Eclipse extensions mechanism and a set of generation targets of interest is selected by a user at the generator model creation time. </li>
+		</ul>
+		<h2 id="concepts">Concepts</h2>
+		<ul>
+			<li>Code generator model</li>
+			<li>Root element - keeps a list of EPackages included in the model and a list of generation targets.</li>
+			<li>Model elements - reference Ecore model elements - packages, classifiers, ... Generator model elements keep track of element Ecore model elements selection and contain configuration elements for the model element.</li>
+			<li>Generator target is an extension point which defines a name of the target and an implementation class which performs actual generation.</li>
+			<li>The target generator class has a method which creates configuration elements contained in the generation model.</li>
+			<li>The target generator also has a method selecting model elements supported by the target. Only model elements supported by at least one target are displayed in the tree view.
+				<br/>
+			</li>
+			<li>Configuration elements are displayed in the tab view in the right bottom of the editor.</li>
+		</ul>
+		<h2 id="creating-a-model">Creating a model</h2>
+		<p>Select "File &gt; New &gt; Other" and then "Nasdanika / Ecore Code Generation Model":</p>
+		<p>
+			<img alt="select-wizard.png" border="0" src="select-wizard.png"/>
+		</p>
+		<p>Click "Next" and select parent folder and file name:</p>
+		<p>
+			<img alt="create-model.png" border="0" src="create-model.png"/>
+		</p>
+		<p>Click "Next" and select source EPackages:</p>
+		<p>
+			<img alt="select-packages.png" border="0" src="select-packages.png"/>
+		</p>
+		<p>
+			<img alt="load-resource.png" border="0" src="load-resource.png"/>
+		</p>
+		<p>
+			<img alt="file-selection.png" border="0" src="file-selection.png"/>
+		</p>
+		<p>
+			<img alt="selected-package.png" border="0" src="selected-package.png"/>
+		</p>
+		<p>Click "Next" and select generation targets:</p>
+		<p>
+			<img alt="select-generation-targets.png" border="0" src="select-generation-targets.png"/>
+		</p>
+		<p>Click "Finish".
+			<br/>
+		</p>
+		<h2 id="editing-the-model">Editing the model</h2>
+		<ul>
+			<li>Select Ecore elements to be included in the generation process.</li>
+			<li>Fill out configuration forms for elements.</li>
+		</ul>
+		<p>
+			<img alt="ledger-ui-model.png" border="0" src="ledger-ui-model.png"/>
+		</p>
+		<p>Configuration forms perform live validation of input. Also the model is validated before generation.</p>
+		<h2 id="generating-code">Generating code</h2>
+		<ul>
+			<li>Select the model root in the tree. </li>
+			<li>Click the cog icon in the top right cornder of the editor.</li>
+		</ul>
+		<h2 id="usage-scenario">Usage scenario</h2>
+		<h3 id="web-ui-generation">Web UI generation</h3>
+		<p>This scenario is shown in the screenshots above.</p>
+		<p>A server application is using a domain model stored in CDO repository. There is a need to create a set of web pages dealing with a particular aspect of the model. </p>
+		<p>In this case a developer would create a generator model with the application domain model as input and Web UI generation target.
+			Then they would select domain model elements which participate in the user stories they are implementing. 
+			In essence, they would define a bounded context for their application. </p>
+		<p>After that they would configure Web UI generation for selected domain elements, e.g. select whether to use a select or radio-buttons for value selection.</p>
+		<p>Once everything is configured the developer would generate code for selected targets.</p>
+		<h2 id="api-documentation">API Documentation</h2>
+		<ul>
+			<li>
+				<a href="http://www.nasdanika.org/products/codegen-ecore/apidocs/org.nasdanika.codegen.ecore/apidocs/">Model</a>
+			</li>
+			<li>
+				<a href="http://www.nasdanika.org/products/codegen-ecore/apidocs/org.nasdanika.codegen.ecore.edit/apidocs/">Edit</a>
+			</li>
+			<li>
+				<a href="http://www.nasdanika.org/products/codegen-ecore/apidocs/org.nasdanika.codegen.ecore.editor/apidocs/">Editor</a>
+			</li>
+		</ul>
+		<h2 id="example">Example</h2>
+		<p>
+			<code>Ledger.nsd_ecore_gen</code> in 
+			<a href="https://github.com/Nasdanika/ledger/tree/master/org.nasdanika.ledger.app">Nasdanika Leder App Project</a>.
+		</p>
 	</body>
 </html>
