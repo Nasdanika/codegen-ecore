@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -203,7 +204,8 @@ public class EcoreCodegenForm extends Composite {
 				}
 				
 				if (object instanceof EcoreCodeGenerator) {
-					return ((EcoreCodeGenerator) object).getEPackages().stream().filter(ep -> isSupportedByGenerationTargets(ep)).toArray();
+					EList<EPackage> ePackages = ((EcoreCodeGenerator) object).getEPackages();
+					return ePackages.stream().filter(ep -> !ePackages.contains(ep.eContainer()) && isSupportedByGenerationTargets(ep)).toArray();
 				}
 				
 				if (object instanceof EStructuralFeature || object instanceof EParameter) {
@@ -220,7 +222,7 @@ public class EcoreCodegenForm extends Composite {
 				}
 				
 				if (object instanceof EPackage) {
-					return Arrays.stream(ret).filter(obj -> obj instanceof EClass && isSupportedByGenerationTargets((EModelElement) obj)).toArray();  
+					return Arrays.stream(ret).filter(obj -> (obj instanceof EClass || obj instanceof EPackage) && isSupportedByGenerationTargets((EModelElement) obj)).toArray();  
 				}
 
 				return ret;
