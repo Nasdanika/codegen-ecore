@@ -27,6 +27,8 @@ Nasdanika Ecore Code Generation extends the code generation concepts in the foll
 
 ## Creating a model
 
+_Please keep in mind that you need to install at least one generation target in order to use the editor!_
+
 Select "File > New > Other" and then "Nasdanika / Ecore Code Generation Model":
 
 ![select-wizard.png](select-wizard.png)
