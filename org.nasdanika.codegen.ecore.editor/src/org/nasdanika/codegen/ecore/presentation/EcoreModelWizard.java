@@ -52,6 +52,10 @@ import org.nasdanika.codegen.ecore.EcorePackage;
  * @generated
  */
 public class EcoreModelWizard extends Wizard implements INewWizard {
+	private static final String EXTENSION_GENMODEL = ".genmodel";
+
+	private static final String EXTENSION_ECORE = ".ecore";
+
 	/**
 	 * The supported extensions for created files.
 	 * <!-- begin-user-doc -->
@@ -317,7 +321,20 @@ public class EcoreModelWizard extends Wizard implements INewWizard {
 		newFileCreationPage = new EcoreModelWizardNewFileCreationPage("Whatever", selection);
 		newFileCreationPage.setTitle(ecorecodegenerationEditorPlugin.INSTANCE.getString("_UI_EcoreModelWizard_label"));
 		newFileCreationPage.setDescription(ecorecodegenerationEditorPlugin.INSTANCE.getString("_UI_EcoreModelWizard_description"));
-		newFileCreationPage.setFileName(ecorecodegenerationEditorPlugin.INSTANCE.getString("_UI_EcoreEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
+		String fileNameBase = ecorecodegenerationEditorPlugin.INSTANCE.getString("_UI_EcoreEditorFilenameDefaultBase");
+		IFile modelFile = null;
+		if (!selection.isEmpty()) {
+			Object fe = selection.getFirstElement();
+			if (fe instanceof IFile) {
+				IFile sf = (IFile) fe;
+				String sfn = sf.getName();
+				if (sfn.endsWith(EXTENSION_ECORE) || sfn.endsWith(EXTENSION_GENMODEL)) {
+					fileNameBase = sfn.substring(0, sfn.lastIndexOf('.'));
+					modelFile = sf;
+				}
+			}
+		}
+		newFileCreationPage.setFileName(fileNameBase + "." + FILE_EXTENSIONS.get(0));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -343,7 +360,7 @@ public class EcoreModelWizard extends Wizard implements INewWizard {
 
 					// Make up a unique new name here.
 					//
-					String defaultModelBaseFilename = ecorecodegenerationEditorPlugin.INSTANCE.getString("_UI_EcoreEditorFilenameDefaultBase");
+					String defaultModelBaseFilename = fileNameBase;
 					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
@@ -353,7 +370,7 @@ public class EcoreModelWizard extends Wizard implements INewWizard {
 				}
 			}
 		}
-		ePackagesSelectionPage = new EPackagesSelectionPage("ePackagesSelectionPage");
+		ePackagesSelectionPage = new EPackagesSelectionPage("ePackagesSelectionPage", modelFile);
 		ePackagesSelectionPage.setTitle(ecorecodegenerationEditorPlugin.INSTANCE.getString("_UI_EcoreModelWizard_label"));
 		ePackagesSelectionPage.setDescription("Select packages");
 		addPage(ePackagesSelectionPage);

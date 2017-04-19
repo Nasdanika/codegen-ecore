@@ -1,7 +1,13 @@
 package org.nasdanika.codegen.ecore.presentation;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.presentation.EcoreActionBarContributor.ExtendedLoadResourceAction.ExtendedLoadResourceDialog;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -19,6 +25,7 @@ import org.eclipse.swt.widgets.Composite;
 public class EPackagesSelectionPage extends WizardPage {
 	
 	private org.eclipse.swt.widgets.List list;
+	private IFile modelFile;
 	
 	public String[] getResourceURIs() {
 		return list.getItems();
@@ -29,8 +36,9 @@ public class EPackagesSelectionPage extends WizardPage {
 	 * @param pageName Page name.
 	 * @param newFileCreationPage 
 	 */
-	public EPackagesSelectionPage(String pageName) {
+	public EPackagesSelectionPage(String pageName, IFile modelFile) {
 		super(pageName);
+		this.modelFile = modelFile;
 	}
 	
 	/**
@@ -85,7 +93,16 @@ public class EPackagesSelectionPage extends WizardPage {
 			}
 		});
 
+		if (modelFile != null) {
+			URI modelFileURI = URI.createPlatformResourceURI(modelFile.getProject().getName()+"/"+modelFile.getProjectRelativePath().toString(), true);
+			list.add(modelFileURI.toString());
+		}
+		
 		setPageComplete(list.getItemCount() > 0);
+		if (list.getSelectionCount() == 0 && list.getItemCount() > 0) {
+			list.select(0);
+			btnRemove.setEnabled(true);
+		}
 		
 	}
 									
