@@ -1,6 +1,10 @@
 # ECore Code Generation
 
-[Online documentation](org.nasdanika.codegen.ecore.editor/doc/ecore.md).
+* [Online documentation](org.nasdanika.codegen.ecore.editor/doc/ecore.md).
+* JavaDoc
+  * [Model](http://www.nasdanika.org/products/codegen-ecore/apidocs/org.nasdanika.codegen.ecore/apidocs)
+  * [Edit](http://www.nasdanika.org/products/codegen-ecore/apidocs/org.nasdanika.codegen.ecore.edit/apidocs)
+  * [Editor](http://www.nasdanika.org/products/codegen-ecore/apidocs/org.nasdanika.codegen.ecore.editor/apidocs)
 
 ## P2 Repository
 

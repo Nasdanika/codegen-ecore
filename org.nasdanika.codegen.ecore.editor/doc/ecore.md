@@ -63,6 +63,9 @@ Click "Finish".
 
 Configuration forms perform live validation of input. Also the model is validated before generation.
 
+Sometimes the editor fails to populate the model tree and displays only the root node. 
+If it happens, close the editor and re-open - it should solve the problem. 
+
 ## Generating code
 
 * Select the model root in the tree. 
