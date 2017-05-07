@@ -4,6 +4,7 @@ package org.nasdanika.codegen.ecore.impl;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.ECollections;
@@ -110,7 +111,12 @@ public class EPackageSourceImpl extends CDOObjectImpl implements EPackageSource 
 			}			
 		} else {
 			URI uri = URI.createURI(getLocation());
-			if (eResource() != null) { 
+			if (uri.isRelative()) {
+				if (eResource() == null) {
+					System.err.println("Resource is null"); // TODO - proper logging.
+					return ret;
+				}
+				
 				URI base = eResource().getURI();
 				if (base != null && base.isHierarchical()) {
 					uri = uri.resolve(base);
