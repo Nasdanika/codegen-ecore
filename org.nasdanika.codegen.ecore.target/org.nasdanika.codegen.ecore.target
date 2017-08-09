@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="org.nasdanika.codegen.ecore.target" sequenceNumber="9">
+<?pde version="3.8"?><target name="org.nasdanika.codegen.ecore.target" sequenceNumber="12">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.nasdanika.third-party.feature.feature.group" version="0.1.0.201702272031"/>
+<unit id="org.nasdanika.third-party.feature.feature.group" version="0.1.0.201707110427"/>
 <repository location="http://www.nasdanika.org/third-party/org.nasdanika.third-party.repository/target/repository"/>
 </location>
 <location path="${eclipse_home}" type="Profile"/>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="com.github.spullara.mustache.java.compiler" version="0.9.2"/>
-<unit id="org.codehaus.janino.commons-compiler" version="3.0.6"/>
-<unit id="org.codehaus.janino" version="3.0.6"/>
-<repository location="http://www.nasdanika.org/maven-osgi"/>
+<unit id="org.nasdanika.presentation.feature.feature.group" version="0.1.0.201707301405"/>
+<repository location="http://www.nasdanika.org/products/presentation/repository"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.nasdanika.presentation.feature.feature.group" version="0.1.0.201702092009"/>
-<repository location="http://www.nasdanika.org/products/presentation/repository"/>
+<unit id="com.github.spullara.mustache.java.compiler" version="0.9.2"/>
+<unit id="org.codehaus.janino" version="3.0.6"/>
+<unit id="org.codehaus.janino.commons-compiler" version="3.0.6"/>
+<unit id="org.yaml.snakeyaml" version="1.17.0"/>
+<repository location="http://www.nasdanika.org/maven-osgi"/>
 </location>
 </locations>
 </target>
