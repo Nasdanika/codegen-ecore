@@ -14,14 +14,14 @@
 	</prerequisites>
 	
 	<properties>
-		<tycho-version>0.26.0</tycho-version>
+		<tycho-version>1.0.0</tycho-version>
 	</properties>
 
 	<repositories>
 		
 		<repository>
-			<id>neon</id>
-			<url>http://download.eclipse.org/releases/neon</url>
+			<id>oxygen</id>
+			<url>http://download.eclipse.org/releases/oxygen</url>
 			<layout>p2</layout>
 		</repository>		
 		
@@ -85,7 +85,7 @@
 			        
 		            <links>						
 						<link>http://download.eclipse.org/modeling/emf/emf/javadoc/2.11</link>
-						<link>http://help.eclipse.org/neon/topic/org.eclipse.emf.cdo.doc/javadoc</link>		
+						<link>http://help.eclipse.org/oxygen/topic/org.eclipse.emf.cdo.doc/javadoc</link>		
 						<link>http://stleary.github.io/JSON-java</link>			
 						<link>https://osgi.org/javadoc/r4v42/</link>
 						<link>http://seleniumhq.github.io/selenium/docs/api/java/</link>
