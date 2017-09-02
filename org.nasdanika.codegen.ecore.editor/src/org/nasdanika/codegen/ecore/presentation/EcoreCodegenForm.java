@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecp.ui.view.swt.ECPSWTViewRenderer;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -532,21 +531,10 @@ public class EcoreCodegenForm extends Composite {
 		}
 		return false;
 	}
-	
-	
+		
 	private void renderConfiguration(EObject configuration, Composite parent) {
 		try {
-			for (IConfigurationElement ce: Platform.getExtensionRegistry().getConfigurationElementsFor("org.nasdanika.presentation.eobject_renderer")) {
-				// TODO renderers cache to improve performance?
-				if ("eobject_renderer".equals(ce.getName()) 
-						&& configuration.eClass().getName().equals(ce.getAttribute("eclass_name"))
-						&& configuration.eClass().getEPackage().getNsURI().equals(ce.getAttribute("epackage_ns_uri"))) {
-					((EObjectRenderer) ce.createExecutableExtension("renderer_class_name")).render(parent, configuration, editingDomain);
-					return;
-				}
-			}					
-		
-			ECPSWTViewRenderer.INSTANCE.render(parent, configuration);
+			EObjectRenderer.Util.render(parent, configuration, editingDomain);
 		} catch (Exception e) {
 			Label lblNewLabel = new Label(parent, SWT.NONE);
 			toolkit.adapt(lblNewLabel, true, true);
