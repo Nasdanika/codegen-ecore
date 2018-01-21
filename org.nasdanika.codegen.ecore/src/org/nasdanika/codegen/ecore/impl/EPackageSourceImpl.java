@@ -4,7 +4,6 @@ package org.nasdanika.codegen.ecore.impl;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.ECollections;

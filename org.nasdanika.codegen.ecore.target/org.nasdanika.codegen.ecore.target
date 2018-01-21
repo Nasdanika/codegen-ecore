@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="org.nasdanika.codegen.ecore.target" sequenceNumber="12">
+<?pde version="3.8"?><target name="org.nasdanika.codegen.ecore.target" sequenceNumber="18">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.nasdanika.third-party.feature.feature.group" version="0.1.0.201707110427"/>
@@ -7,14 +7,24 @@
 </location>
 <location path="${eclipse_home}" type="Profile"/>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.nasdanika.presentation.feature.feature.group" version="0.1.0.201707301405"/>
+<unit id="org.nasdanika.presentation.feature.feature.group" version="0.1.0.201709022130"/>
 <repository location="http://www.nasdanika.org/products/presentation/repository"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="com.github.spullara.mustache.java.compiler" version="0.9.2"/>
+<unit id="org.freemarker" version="2.3.22.v20160210-1233"/>
+<unit id="org.freemarker.source" version="2.3.22.v20160210-1233"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20170516192513/repository"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="com.github.spullara.mustache.java.compiler" version="0.9.5"/>
+<unit id="com.github.spullara.mustache.java.compiler.source" version="0.9.5"/>
+<unit id="json" version="20170516.0.0"/>
+<unit id="json.source" version="20170516.0.0"/>
+<unit id="org.apache.commons.codec" version="1.10.0"/>
 <unit id="org.codehaus.janino" version="3.0.6"/>
 <unit id="org.codehaus.janino.commons-compiler" version="3.0.6"/>
-<unit id="org.yaml.snakeyaml" version="1.17.0"/>
+<unit id="org.yaml.snakeyaml" version="1.18.0"/>
+<unit id="org.yaml.snakeyaml.source" version="1.18.0"/>
 <repository location="http://www.nasdanika.org/maven-osgi"/>
 </location>
 </locations>

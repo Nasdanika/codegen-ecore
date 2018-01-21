@@ -58,7 +58,7 @@
 		
 		<repository>
 			<id>help</id>
-			<url>http://www.nasdanika.org/products/help</url>
+			<url>http://www.nasdanika.org/products/help/repository</url>
 			<layout>p2</layout>
 		</repository>		
 	</repositories>
